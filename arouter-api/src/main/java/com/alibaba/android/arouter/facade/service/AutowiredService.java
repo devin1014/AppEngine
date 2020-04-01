@@ -2,6 +2,8 @@ package com.alibaba.android.arouter.facade.service;
 
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.callback.AutowiredCallback;
+import com.alibaba.android.arouter.facade.callback.SyringeCallback;
 import com.alibaba.android.arouter.facade.template.IProvider;
 
 /**
@@ -17,5 +19,5 @@ public interface AutowiredService extends IProvider {
      * Autowired core.
      * @param instance the instance who need autowired.
      */
-    void autowire(Object instance, @Nullable Class<?> ... inheritClass);
+    void autowire(Object instance, AutowiredCallback callback, @Nullable Class<?> ... inheritClass);
 }

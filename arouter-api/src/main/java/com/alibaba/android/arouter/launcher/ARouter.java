@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.exception.InitException;
 import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.callback.AutowiredCallback;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
+import com.alibaba.android.arouter.facade.callback.SyringeCallback;
 import com.alibaba.android.arouter.facade.template.ILogger;
 import com.alibaba.android.arouter.utils.Consts;
 
@@ -134,23 +136,23 @@ public final class ARouter {
      * Inject params and services.
      */
     public void inject(Object object) {
-        inject(object,true);
+        inject(object, null, true);
     }
 
-    public void inject(Object object, boolean parseInherit) {
+    public void inject(Object object, AutowiredCallback callback, boolean parseInherit) {
         if(parseInherit && (object instanceof Activity || object instanceof android.app.Fragment || object instanceof Fragment)){
-            injectActivityOrFragment(object);
+            injectActivityOrFragment(object, callback);
         }
         else{
-            _ARouter.inject(object);
+            _ARouter.inject(object, callback);
         }
     }
 
     /**
      * Inject params and services for activity
      */
-    private void injectActivityOrFragment(Object object) {
-        _ARouter.inject(object, parseObjectInherits(object));
+    private void injectActivityOrFragment(Object object, AutowiredCallback callback) {
+        _ARouter.inject(object, callback, parseObjectInherits(object));
     }
 
     private Class<?>[] parseObjectInherits(@NonNull Object object){

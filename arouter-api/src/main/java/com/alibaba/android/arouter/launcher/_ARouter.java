@@ -18,8 +18,10 @@ import com.alibaba.android.arouter.exception.HandlerException;
 import com.alibaba.android.arouter.exception.InitException;
 import com.alibaba.android.arouter.exception.NoRouteFoundException;
 import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.callback.AutowiredCallback;
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
+import com.alibaba.android.arouter.facade.callback.SyringeCallback;
 import com.alibaba.android.arouter.facade.service.*;
 import com.alibaba.android.arouter.facade.template.ILogger;
 import com.alibaba.android.arouter.thread.DefaultPoolExecutor;
@@ -163,10 +165,10 @@ final class _ARouter {
         }
     }
 
-    static void inject(Object thiz, Class<?>... classes) {
+    static void inject(Object thiz, AutowiredCallback callback, Class<?>... classes) {
         AutowiredService autowiredService = ((AutowiredService) ARouter.getInstance().build("/arouter/service/autowired").navigation());
         if (null != autowiredService) {
-            autowiredService.autowire(thiz,classes);
+            autowiredService.autowire(thiz, callback, classes);
         }
     }
 

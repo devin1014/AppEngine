@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import android.util.LruCache;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.facade.callback.AutowiredCallback;
+import com.alibaba.android.arouter.facade.callback.SyringeCallback;
 import com.alibaba.android.arouter.facade.service.AutowiredService;
 import com.alibaba.android.arouter.facade.template.ISyringe;
 
@@ -32,18 +34,28 @@ public class AutowiredServiceImpl implements AutowiredService {
     }
 
     @Override
-    public void autowire(Object instance, @Nullable Class<?>... inheritClass) {
+    public void autowire(Object instance, AutowiredCallback callback, @Nullable Class<?>... inheritClass) {
+        final List<String> fields = new ArrayList<>();
+        SyringeCallback syringeCallback = callback==null? null: new SyringeCallback() {
+            @Override
+            public void onSyringeFailed(String fieldName) {
+                fields.add(fieldName);
+            }
+        };
         if(inheritClass==null || inheritClass.length==0){
-            autowireObject(instance, instance.getClass());
+            autowireObject(instance, syringeCallback, instance.getClass());
         }
         else{
             for(Class<?> clazz : inheritClass){
-                autowireObject(instance, clazz);
+                autowireObject(instance, syringeCallback, clazz);
             }
+        }
+        if(fields.size()>0&&callback!=null) {
+            callback.onAutowiredFailed(fields);
         }
     }
 
-    private void autowireObject(Object instance, Class<?> clazz) {
+    private void autowireObject(Object instance, SyringeCallback callback, Class<?> clazz) {
         String className = clazz.getName();
         try {
             if (!blackList.contains(className)) {
@@ -51,7 +63,7 @@ public class AutowiredServiceImpl implements AutowiredService {
                 if (null == autowiredHelper) {  // No cache.
                     autowiredHelper = (ISyringe) Class.forName(className + SUFFIX_AUTOWIRED).getConstructor().newInstance();
                 }
-                autowiredHelper.inject(instance);
+                autowiredHelper.inject(instance,callback);
                 classCache.put(className, autowiredHelper);
             }
         } catch (Exception ex) {

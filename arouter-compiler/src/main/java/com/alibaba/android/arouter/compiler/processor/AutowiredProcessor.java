@@ -28,9 +28,6 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedOptions;
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -52,6 +49,7 @@ public class AutowiredProcessor extends BaseProcessor {
     private Map<TypeElement, List<Element>> parentAndChild = new HashMap<>();   // Contain field need autowired and his super class.
     private static final ClassName ARouterClass = ClassName.get("com.alibaba.android.arouter.launcher", "ARouter");
     private static final ClassName AndroidLog = ClassName.get("android.util", "Log");
+    private static final ClassName SyringeCallback = ClassName.get("com.alibaba.android.arouter.facade.callback", "SyringeCallback");
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -87,6 +85,7 @@ public class AutowiredProcessor extends BaseProcessor {
 
         // Build input param name.
         ParameterSpec objectParamSpec = ParameterSpec.builder(TypeName.OBJECT, "target").build();
+        ParameterSpec callbackParamSpec = ParameterSpec.builder(SyringeCallback, "callback").build();
 
         if (MapUtils.isNotEmpty(parentAndChild)) {
             for (Map.Entry<TypeElement, List<Element>> entry : parentAndChild.entrySet()) {
@@ -94,7 +93,8 @@ public class AutowiredProcessor extends BaseProcessor {
                 MethodSpec.Builder injectMethodBuilder = MethodSpec.methodBuilder(METHOD_INJECT)
                         .addAnnotation(Override.class)
                         .addModifiers(PUBLIC)
-                        .addParameter(objectParamSpec);
+                        .addParameter(objectParamSpec)
+                        .addParameter(callbackParamSpec);
 
                 TypeElement parent = entry.getKey();
                 List<Element> childs = entry.getValue();
@@ -178,8 +178,12 @@ public class AutowiredProcessor extends BaseProcessor {
                         // Validator
                         if (fieldConfig.required() && !element.asType().getKind().isPrimitive()) {  // Primitive wont be check.
                             injectMethodBuilder.beginControlFlow("if (null == substitute." + fieldName + ")");
+                            injectMethodBuilder.beginControlFlow("if (null == callback)");
                             injectMethodBuilder.addStatement(
                                     "$T.e(\"" + Consts.TAG + "\", \"The field '" + fieldName + "' is null, in class '\" + $T.class.getName() + \"!\")", AndroidLog, ClassName.get(parent));
+                            injectMethodBuilder.nextControlFlow("else");
+                            injectMethodBuilder.addStatement("callback.onSyringeFailed(\"" + fieldName + "\")");
+                            injectMethodBuilder.endControlFlow();
                             injectMethodBuilder.endControlFlow();
                         }
                     }

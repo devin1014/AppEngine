@@ -1,5 +1,7 @@
 package com.alibaba.android.arouter.facade.template;
 
+import com.alibaba.android.arouter.facade.callback.SyringeCallback;
+
 /**
  * Template of syringe
  *
@@ -8,5 +10,5 @@ package com.alibaba.android.arouter.facade.template;
  * @since 2017/2/20 下午4:41
  */
 public interface ISyringe {
-    void inject(Object target);
+    void inject(Object target, SyringeCallback callback);
 }
