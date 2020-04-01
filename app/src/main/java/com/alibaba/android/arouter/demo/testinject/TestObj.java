@@ -1,6 +1,6 @@
 package com.alibaba.android.arouter.demo.testinject;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author zhilong <a href="mailto:zhilong.lzl@alibaba-inc.com">Contact me.</a>

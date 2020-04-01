@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.exception.InitException;
 import com.alibaba.android.arouter.facade.Postcard;
@@ -138,7 +138,7 @@ public final class ARouter {
     }
 
     public void inject(Object object, boolean parseInherit) {
-        if(parseInherit && (object instanceof Activity || object instanceof android.app.Fragment || object instanceof android.support.v4.app.Fragment)){
+        if(parseInherit && (object instanceof Activity || object instanceof android.app.Fragment || object instanceof Fragment)){
             injectActivityOrFragment(object);
         }
         else{

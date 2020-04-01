@@ -1,7 +1,7 @@
 package com.alibaba.android.arouter.core;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.LruCache;
 
 import com.alibaba.android.arouter.facade.annotation.Route;

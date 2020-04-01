@@ -5,7 +5,7 @@ dependencies {
     implementation project(':arouter-api')
     annotationProcessor project(':arouter-compiler')
 
-    implementation "com.android.support:appcompat-v7:${SUPPORT_LIB_VERSION}"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 }
 android {
     compileSdkVersion Integer.parseInt(COMPILE_SDK_VERSION)
