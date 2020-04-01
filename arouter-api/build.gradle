@@ -1,5 +1,12 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayName = 'arouter-api'
+    artifact = bintrayName
+    libraryName = 'ARouter sdk'
+    libraryDescription = 'A router for android'
+}
+
 android {
     compileSdkVersion Integer.parseInt(COMPILE_SDK_VERSION)
     buildToolsVersion BUILDTOOLS_VERSION
@@ -36,3 +43,5 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
+
+apply from: '../upload.gradle'
