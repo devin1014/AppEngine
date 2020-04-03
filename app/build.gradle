@@ -25,6 +25,14 @@ android {
     signingConfigs {
     }
 
+    flavorDimensions "app"
+
+    productFlavors{
+        dev{
+            dimension "app"
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false

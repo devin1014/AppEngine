@@ -43,6 +43,7 @@ import static javax.lang.model.element.Modifier.PUBLIC;
  * @version 1.0
  * @since 2017/2/20 下午5:56
  */
+@SuppressWarnings("unused")
 @AutoService(Processor.class)
 @SupportedAnnotationTypes({ANNOTATION_TYPE_AUTOWIRED})
 public class AutowiredProcessor extends BaseProcessor {

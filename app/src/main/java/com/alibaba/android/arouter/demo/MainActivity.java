@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.openLog:
                 ARouter.openLog();
+                ARouter.printStackTrace();
                 break;
             case R.id.openDebug:
                 ARouter.openDebug();

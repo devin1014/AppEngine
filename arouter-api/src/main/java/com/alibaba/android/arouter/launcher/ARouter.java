@@ -11,7 +11,6 @@ import com.alibaba.android.arouter.exception.InitException;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.AutowiredCallback;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
-import com.alibaba.android.arouter.facade.callback.SyringeCallback;
 import com.alibaba.android.arouter.facade.template.ILogger;
 import com.alibaba.android.arouter.utils.Consts;
 

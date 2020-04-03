@@ -40,6 +40,7 @@ import static javax.lang.model.element.Modifier.PUBLIC;
  * @version 1.0
  * @since 16/8/23 14:11
  */
+@SuppressWarnings("unused")
 @AutoService(Processor.class)
 @SupportedAnnotationTypes(ANNOTATION_TYPE_INTECEPTOR)
 public class InterceptorProcessor extends BaseProcessor {

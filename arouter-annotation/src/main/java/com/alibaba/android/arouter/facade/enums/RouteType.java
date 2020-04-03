@@ -12,7 +12,7 @@ public enum RouteType {
     SERVICE(1, "android.app.Service"),
     PROVIDER(2, "com.alibaba.android.arouter.facade.template.IProvider"),
     CONTENT_PROVIDER(-1, "android.app.ContentProvider"),
-    BOARDCAST(-1, ""),
+    BROADCAST(-1, ""),
     METHOD(-1, ""),
     FRAGMENT(-1, "android.app.Fragment"),
     UNKNOWN(-1, "Unknown route type");
