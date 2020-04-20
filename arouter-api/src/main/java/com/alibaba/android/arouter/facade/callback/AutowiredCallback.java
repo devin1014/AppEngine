@@ -2,6 +2,8 @@ package com.alibaba.android.arouter.facade.callback;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 public interface AutowiredCallback {
-    void onAutowiredFailed(List<String> fields);
+    void onAutowiredFailed(@NonNull List<String> fields);
 }

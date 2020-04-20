@@ -134,35 +134,37 @@ public final class ARouter {
     /**
      * Inject params and services.
      */
-    public void inject(Object object) {
-        inject(object, null, true);
+    public boolean inject(Object object) {
+       return inject(object, null, true);
     }
 
-    public void inject(Object object, AutowiredCallback callback, boolean parseInherit) {
+    public boolean inject(Object object, AutowiredCallback callback, boolean parseInherit) {
         if(parseInherit && (object instanceof Activity || object instanceof android.app.Fragment || object instanceof Fragment)){
-            injectActivityOrFragment(object, callback);
+            return injectActivityOrFragment(object, callback);
         }
         else{
-            _ARouter.inject(object, callback);
+            return _ARouter.inject(object, callback);
         }
     }
 
     /**
      * Inject params and services for activity
      */
-    private void injectActivityOrFragment(Object object, AutowiredCallback callback) {
-        _ARouter.inject(object, callback, parseObjectInherits(object));
+    private boolean injectActivityOrFragment(Object object, AutowiredCallback callback) {
+        return  _ARouter.inject(object, callback, parseObjectInherits(object));
     }
 
     private Class<?>[] parseObjectInherits(@NonNull Object object){
         Class<?> targetClass = object.getClass();
         List<Class<?>> list = new ArrayList<>();
         while (targetClass!=null
-                && !targetClass.getName().equalsIgnoreCase("android.support.v7.app.AppCompatActivity")
+                && !targetClass.getName().equalsIgnoreCase("com.neulion.engine.ui.activity.BaseActionBarActivity")
+                && !targetClass.getName().equalsIgnoreCase("com.neulion.engine.ui.fragment.BaseFragment")
+                    && !targetClass.getName().equalsIgnoreCase("android.support.v7.app.AppCompatActivity")
                     && !targetClass.getName().equalsIgnoreCase("android.support.v4.app.Fragment")
                         && !targetClass.getName().equalsIgnoreCase("android.app.Activity")
-                            && !targetClass.getName().equalsIgnoreCase("android.app.Fragment")
-                                && !targetClass.getName().equalsIgnoreCase("java.lang.Object")){
+                        && !targetClass.getName().equalsIgnoreCase("android.app.Fragment")
+                            && !targetClass.getName().equalsIgnoreCase("java.lang.Object")){
             list.add(targetClass);
             targetClass = targetClass.getSuperclass();
         }

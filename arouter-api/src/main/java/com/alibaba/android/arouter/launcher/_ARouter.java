@@ -164,11 +164,10 @@ final class _ARouter {
         }
     }
 
-    static void inject(Object obj, AutowiredCallback callback, Class<?>... classes) {
+    static boolean inject(Object obj, AutowiredCallback callback, Class<?>... classes) {
         AutowiredService autowiredService = ((AutowiredService) ARouter.getInstance().build("/arouter/service/autowired").navigation());
-        if (null != autowiredService) {
-            autowiredService.autowire(obj, callback, classes);
-        }
+
+        return null != autowiredService&&autowiredService.autowire(obj, callback, classes);
     }
 
     /**

@@ -34,7 +34,7 @@ public class AutowiredServiceImpl implements AutowiredService {
     }
 
     @Override
-    public void autowire(Object instance, AutowiredCallback callback, @Nullable Class<?>... inheritClass) {
+    public boolean autowire(Object instance, AutowiredCallback callback, @Nullable Class<?>... inheritClass) {
         final List<String> fields = new ArrayList<>();
         SyringeCallback syringeCallback = callback==null? null: new SyringeCallback() {
             @Override
@@ -53,6 +53,7 @@ public class AutowiredServiceImpl implements AutowiredService {
         if(fields.size()>0&&callback!=null) {
             callback.onAutowiredFailed(fields);
         }
+        return fields.isEmpty();
     }
 
     private void autowireObject(Object instance, SyringeCallback callback, Class<?> clazz) {

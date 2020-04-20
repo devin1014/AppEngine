@@ -19,5 +19,5 @@ public interface AutowiredService extends IProvider {
      * Autowired core.
      * @param instance the instance who need autowired.
      */
-    void autowire(Object instance, AutowiredCallback callback, @Nullable Class<?> ... inheritClass);
+    boolean autowire(Object instance, AutowiredCallback callback, @Nullable Class<?> ... inheritClass);
 }

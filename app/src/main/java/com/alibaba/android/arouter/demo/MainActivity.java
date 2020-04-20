@@ -15,7 +15,7 @@ import com.alibaba.android.arouter.demo.testinject.TestObj;
 import com.alibaba.android.arouter.demo.testinject.TestParcelable;
 import com.alibaba.android.arouter.demo.testinject.TestSerializable;
 import com.alibaba.android.arouter.demo.testservice.HelloService;
-import com.alibaba.android.arouter.demo.testservice.SingleService;
+import com.alibaba.android.arouter.demo.testservice.SingleServiceImpl;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ARouter.getInstance().navigation(HelloService.class).sayHello("mike");
                 break;
             case R.id.callSingle:
-                ARouter.getInstance().navigation(SingleService.class).sayHello("Mike");
+                ARouter.getInstance().navigation(SingleServiceImpl.class).sayHello("Mike");
                 break;
             // ----------------------------------------------------------------------------
             // ---- 多模块
