@@ -1,28 +1,26 @@
-package com.alibaba.android.arouter.demo.testactivity;
+package com.alibaba.android.arouter.demo.test.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.demo.R;
 import com.alibaba.android.arouter.facade.annotation.Route;
 
 @Route(path = "/test/activity4")
-public class Test4Activity extends AppCompatActivity
-{
+public class Test4Activity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test1);
 
         ((TextView) findViewById(R.id.test)).setText("I am " + Test4Activity.class.getName());
         String extra = getIntent().getStringExtra("extra");
-        if (!TextUtils.isEmpty(extra))
-        {
+        if (!TextUtils.isEmpty(extra)) {
             ((TextView) findViewById(R.id.test2)).setText(extra);
         }
     }

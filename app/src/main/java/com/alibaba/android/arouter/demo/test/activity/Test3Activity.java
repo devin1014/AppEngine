@@ -1,8 +1,9 @@
-package com.alibaba.android.arouter.demo.testactivity;
+package com.alibaba.android.arouter.demo.test.activity;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.demo.R;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -13,8 +14,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
  * 自动注入的测试用例
  */
 @Route(path = "/test/activity3")
-public class Test3Activity extends AppCompatActivity
-{
+public class Test3Activity extends AppCompatActivity {
 
     @Autowired
     String name;
@@ -29,8 +29,7 @@ public class Test3Activity extends AppCompatActivity
     private long high;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test1);
 

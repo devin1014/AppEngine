@@ -1,33 +1,29 @@
-package com.alibaba.android.arouter.demo.testfragment;
+package com.alibaba.android.arouter.demo.test.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.demo.R;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 @Route(path = "/test/test_fragment")
-public class TestFragmentActivity extends AppCompatActivity
-{
+public class TestFragmentActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState)
-    {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_fragment);
 
         RadioGroup radioGroup = findViewById(R.id.tab_group);
-        radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener()
-        {
+        radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                switch (checkedId)
-                {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
                     case R.id.tab_1:
                         showFragment((Fragment) ARouter.getInstance().build("/fragment/tab1")
                                 .withString("name", "tab1")
@@ -65,10 +61,8 @@ public class TestFragmentActivity extends AppCompatActivity
         });
     }
 
-    private void showFragment(Fragment fragment)
-    {
-        if (fragment != null)
-        {
+    private void showFragment(Fragment fragment) {
+        if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)

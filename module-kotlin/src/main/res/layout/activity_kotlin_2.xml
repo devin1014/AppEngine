@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".KotlinAutowiredActivity">
+    tools:context="com.alibaba.android.arouter.demo.kotlin.Kotlin2Activity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Kotlin Autowired activity"
+        android:text="Kotlin Module activity 2"
         android:textSize="16dp"
         android:textStyle="bold"
         tools:ignore="HardcodedText,SpUsage" />
@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp" />
 

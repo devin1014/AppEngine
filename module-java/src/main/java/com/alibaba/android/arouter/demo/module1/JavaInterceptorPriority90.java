@@ -9,13 +9,10 @@ import com.alibaba.android.arouter.facade.callback.InterceptorCallback;
 import com.alibaba.android.arouter.facade.template.IInterceptor;
 
 /**
- * @author Alex <a href="mailto:zhilong.liu@aliyun.com">Contact me.</a>
- * @version 1.0
- * @since 16/9/9 14:34
+ *
  */
 @Interceptor(priority = 90)
-public class TestInterceptor90 implements IInterceptor
-{
+public class JavaInterceptorPriority90 implements IInterceptor {
     /**
      * The operation of this tollgate.
      *
@@ -23,8 +20,7 @@ public class TestInterceptor90 implements IInterceptor
      * @param callback cb
      */
     @Override
-    public void process(Postcard postcard, InterceptorCallback callback)
-    {
+    public void process(Postcard postcard, InterceptorCallback callback) {
         callback.onContinue(postcard);
     }
 
@@ -34,8 +30,7 @@ public class TestInterceptor90 implements IInterceptor
      * @param context ctx
      */
     @Override
-    public void init(Context context)
-    {
-        Log.e("test", "位于moudle1中的拦截器初始化了");
+    public void init(Context context) {
+        Log.e("ARouter", "位于module-java中的拦截器初始化了");
     }
 }

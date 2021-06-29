@@ -3,6 +3,7 @@
     package="com.alibaba.android.arouter.demo">
 
     <application
+        android:name=".App"
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="ARouter demo"
@@ -15,14 +16,17 @@
                     android:host="m.aliyun.com"
                     android:scheme="arouter" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
             <!-- App Links -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="m.aliyun.com"
                     android:scheme="http" />
@@ -37,12 +41,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestWebview"/>
-        <activity android:name=".testactivity.Test1Activity"/>
-        <activity android:name=".testactivity.Test2Activity"/>
-        <activity android:name=".testactivity.Test3Activity"/>
-        <activity android:name=".testactivity.Test4Activity"/>
-        <activity android:name=".testfragment.TestFragmentActivity" />
+        <activity android:name=".test.activity.TestWebview" />
+        <activity android:name=".test.activity.Test1Activity" />
+        <activity android:name=".test.activity.Test2Activity" />
+        <activity android:name=".test.activity.Test3Activity" />
+        <activity android:name=".test.activity.Test4Activity" />
+        <activity android:name=".test.fragment.TestFragmentActivity" />
 
     </application>
 

@@ -1,21 +1,22 @@
 package com.alibaba.android.arouter.demo;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.demo.testinject.TestObj;
-import com.alibaba.android.arouter.demo.testinject.TestParcelable;
-import com.alibaba.android.arouter.demo.testinject.TestSerializable;
-import com.alibaba.android.arouter.demo.testservice.HelloService;
-import com.alibaba.android.arouter.demo.testservice.SingleServiceImpl;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.Fragment;
+
+import com.alibaba.android.arouter.demo.test.inject.TestObj;
+import com.alibaba.android.arouter.demo.test.inject.TestParcelable;
+import com.alibaba.android.arouter.demo.test.inject.TestSerializable;
+import com.alibaba.android.arouter.demo.test.service.HelloService;
+import com.alibaba.android.arouter.demo.test.service.SingleServiceImpl;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -25,34 +26,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener
-{
-    private static Activity activity;
-
-    public static Activity getThis()
-    {
-        return activity;
-    }
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        activity = this;
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
+    @SuppressLint("NonConstantResourceId")
+    @SuppressWarnings("SwitchStatementWithoutDefaultBranch")
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.openLog:
                 ARouter.openLog();
                 ARouter.printStackTrace();
@@ -119,15 +104,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .navigation(this);
                 break;
             case R.id.newVersionAnim:
-                if (Build.VERSION.SDK_INT >= 16)
-                {
+                if (Build.VERSION.SDK_INT >= 16) {
                     ARouter.getInstance()
                             .build("/test/activity2")
                             .withOptionsCompat(ActivityOptionsCompat.makeScaleUpAnimation(v, v.getWidth() / 2, v.getHeight() / 2, 0, 0))
                             .navigation();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(this, "API < 16,不支持新版本动画", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -143,16 +125,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.interceptor:
                 ARouter.getInstance()
                         .build("/test/activity4")
-                        .navigation(this, new NavCallback()
-                        {
+                        .navigation(this, new NavCallback() {
                             @Override
-                            public void onArrival(Postcard postcard)
-                            {
+                            public void onArrival(Postcard postcard) {
                             }
 
                             @Override
-                            public void onInterrupt(Postcard postcard)
-                            {
+                            public void onInterrupt(Postcard postcard) {
                                 Log.d("ARouter", "被拦截了");
                             }
                         });
@@ -209,29 +188,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // ---- 跳转失败
             // ----------------------------------------------------------------------------
             case R.id.failNav: // 跳转失败，单独降级
-                ARouter.getInstance().build("/xxx/xxx").navigation(this, new NavCallback()
-                {
+                ARouter.getInstance().build("/xxx/xxx").navigation(this, new NavCallback() {
                     @Override
-                    public void onFound(Postcard postcard)
-                    {
+                    public void onFound(Postcard postcard) {
                         Log.d("ARouter", "找到了");
                     }
 
                     @Override
-                    public void onLost(Postcard postcard)
-                    {
+                    public void onLost(Postcard postcard) {
                         Log.d("ARouter", "找不到了");
                     }
 
                     @Override
-                    public void onArrival(Postcard postcard)
-                    {
+                    public void onArrival(Postcard postcard) {
                         Log.d("ARouter", "跳转完了");
                     }
 
                     @Override
-                    public void onInterrupt(Postcard postcard)
-                    {
+                    public void onInterrupt(Postcard postcard) {
                         Log.d("ARouter", "被拦截了");
                     }
                 });
@@ -246,12 +220,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 666)
-        {
+        if (requestCode == 666) {
             Toast.makeText(this, String.format("requestCode:%s, resultCode:%s", requestCode, resultCode), Toast.LENGTH_SHORT).show();
         }
     }

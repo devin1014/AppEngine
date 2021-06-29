@@ -6,9 +6,9 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 abstract class KotlinBaseActivity : AppCompatActivity() {
     @Autowired
     @JvmField
-    var parentName: String? = null
+    var name: String? = null
 
     @Autowired
     @JvmField
-    var parentAge: Int? = 0
+    var description: String? = null
 }

@@ -1,31 +1,29 @@
-package com.alibaba.android.arouter.demo.testactivity;
+package com.alibaba.android.arouter.demo.test.activity;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.demo.R;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 
 @Route(path = "/test/activity2")
-public class Test2Activity extends AppCompatActivity
-{
+public class Test2Activity extends AppCompatActivity {
     @Autowired
     String key1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test2);
 
         //ARouter.getInstance().inject(this);
         String value = getIntent().getStringExtra("key1");
 
-        if (!TextUtils.isEmpty(value))
-        {
+        if (!TextUtils.isEmpty(value)) {
             Toast.makeText(this, "exist param :" + value, Toast.LENGTH_LONG).show();
         }
 

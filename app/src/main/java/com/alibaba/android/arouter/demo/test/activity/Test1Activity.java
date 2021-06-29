@@ -1,14 +1,15 @@
-package com.alibaba.android.arouter.demo.testactivity;
+package com.alibaba.android.arouter.demo.test.activity;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.alibaba.android.arouter.demo.R;
-import com.alibaba.android.arouter.demo.testinject.TestObj;
-import com.alibaba.android.arouter.demo.testinject.TestParcelable;
-import com.alibaba.android.arouter.demo.testinject.TestSerializable;
-import com.alibaba.android.arouter.demo.testservice.HelloService;
+import com.alibaba.android.arouter.demo.test.inject.TestObj;
+import com.alibaba.android.arouter.demo.test.inject.TestParcelable;
+import com.alibaba.android.arouter.demo.test.inject.TestSerializable;
+import com.alibaba.android.arouter.demo.test.service.HelloService;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -20,8 +21,7 @@ import java.util.Map;
  * https://m.aliyun.com/test/activity1?name=老王&age=23&boy=true&high=180
  */
 @Route(path = "/test/activity1", name = "测试用 Activity")
-public class Test1Activity extends AppCompatActivity
-{
+public class Test1Activity extends AppCompatActivity {
 
     @Autowired(desc = "姓名")
     String name = "jack";
@@ -65,8 +65,7 @@ public class Test1Activity extends AppCompatActivity
     private long high;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test1);
 

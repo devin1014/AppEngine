@@ -9,6 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.alibaba.android.arouter.demo.testactivity.Test4Activity">
+    tools:context=".test.activity.Test4Activity">
 
 </RelativeLayout>

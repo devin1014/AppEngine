@@ -1,7 +1,8 @@
-package com.alibaba.android.arouter.demo.testinject;
+package com.alibaba.android.arouter.demo.test.inject;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -9,58 +10,48 @@ import androidx.annotation.NonNull;
  * @version 1.0
  * @since 2017/3/16 下午4:42
  */
-public class TestParcelable implements Parcelable
-{
-    public static final Creator<TestParcelable> CREATOR = new Creator<TestParcelable>()
-    {
+public class TestParcelable implements Parcelable {
+    public static final Creator<TestParcelable> CREATOR = new Creator<TestParcelable>() {
         @Override
-        public TestParcelable createFromParcel(Parcel in)
-        {
+        public TestParcelable createFromParcel(Parcel in) {
             return new TestParcelable(in);
         }
 
         @Override
-        public TestParcelable[] newArray(int size)
-        {
+        public TestParcelable[] newArray(int size) {
             return new TestParcelable[size];
         }
     };
     public String name;
     public int id;
 
-    public TestParcelable()
-    {
+    public TestParcelable() {
     }
 
-    public TestParcelable(String name, int id)
-    {
+    public TestParcelable(String name, int id) {
         this.name = name;
         this.id = id;
     }
 
-    protected TestParcelable(Parcel in)
-    {
+    protected TestParcelable(Parcel in) {
         name = in.readString();
         id = in.readInt();
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags)
-    {
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeInt(id);
     }
 
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     @NonNull
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "{" +
                 "name:" + name +
                 ",id:" + id +
