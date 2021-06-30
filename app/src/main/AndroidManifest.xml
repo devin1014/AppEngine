@@ -41,12 +41,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".test.activity.TestWebview" />
-        <activity android:name=".test.activity.Test1Activity" />
-        <activity android:name=".test.activity.Test2Activity" />
-        <activity android:name=".test.activity.Test3Activity" />
-        <activity android:name=".test.activity.Test4Activity" />
-        <activity android:name=".test.fragment.TestFragmentActivity" />
+        <activity android:name=".test.activity.WebViewActivity" />
+        <activity android:name=".test.activity.TestActivity" />
+        <activity android:name=".test.activity.FragmentTabsActivity" />
 
     </application>
 

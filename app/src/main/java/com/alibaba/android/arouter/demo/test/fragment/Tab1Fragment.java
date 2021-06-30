@@ -14,13 +14,18 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 
-@Route(path = "/fragment/tab1")
+import java.io.Serializable;
+
+@Route(path = "/app/fragment/tab1")
 public class Tab1Fragment extends BaseTabFragment {
-    @Autowired
-    String name;
 
     @Autowired
-    int age;
+    public String key1;
+
+    public String key2;
+
+    @Autowired
+    public Serializable obj;
 
     @Nullable
     @Override
@@ -34,7 +39,13 @@ public class Tab1Fragment extends BaseTabFragment {
 
         ARouter.getInstance().inject(this);
 
-        TextView textView = view.findViewById(R.id.fragment_content);
-        textView.setText(String.format("[0x%s]@{parent:%s,%s},{child:%s,%s}", Integer.toHexString(hashCode()), parentName, parentAge, name, age));
+        key2 = getArguments() != null ? getArguments().getString("key2") : null;
+
+        String builder = "name=" + name + "\n" +
+                "description=" + description + "\n" +
+                "key1=" + key1 + "\n" +
+                "key2=" + key2 + "\n" +
+                "obj=" + obj + "\n";
+        ((TextView) view.findViewById(R.id.content)).setText(builder);
     }
 }

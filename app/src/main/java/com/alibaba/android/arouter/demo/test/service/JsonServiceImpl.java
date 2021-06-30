@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.service.SerializationService;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
 
 import java.lang.reflect.Type;
@@ -15,11 +16,11 @@ import java.lang.reflect.Type;
  * @version 1.0
  * @since 2017/4/10 下午2:10
  */
-@Route(path = "/yourservicegroupname/json")
+@Route(path = "/app/service/json_parser")
 public class JsonServiceImpl implements SerializationService {
     @Override
     public void init(Context context) {
-
+        ARouter.logger.info(getClass().getSimpleName(), getClass().getSimpleName() + " has init.");
     }
 
     @Override

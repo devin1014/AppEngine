@@ -8,7 +8,7 @@
 
     <application>
         <activity android:name=".KotlinActivity" />
-        <activity android:name=".Kotlin2Activity" />
+        <activity android:name=".KotlinGroupActivity" />
     </application>
 
 </manifest>

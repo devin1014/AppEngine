@@ -9,9 +9,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 
 import java.io.Serializable;
 
-@Route(path = "/module_java/target1")
-public class JavaActivity extends JavaBaseActivity {
-
+@Route(path = "/module_java/target2", group = "java")
+public class JavaGroupActivity extends JavaBaseActivity {
     @Autowired
     public String key1;
 

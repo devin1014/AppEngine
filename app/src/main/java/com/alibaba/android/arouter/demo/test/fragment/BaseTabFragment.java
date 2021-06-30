@@ -6,8 +6,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 
 public abstract class BaseTabFragment extends Fragment {
     @Autowired
-    String parentName;
+    String name;
 
     @Autowired
-    int parentAge;
+    String description;
 }

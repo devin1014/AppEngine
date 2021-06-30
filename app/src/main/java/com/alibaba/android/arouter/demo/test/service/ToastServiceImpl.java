@@ -4,24 +4,24 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.facade.template.IProvider;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 /**
- * 测试单类注入
+ *
  */
-@Route(path = "/app/service/single")
-public class SingleServiceImpl implements IProvider {
+@Route(path = "/app/service/toast")
+public class ToastServiceImpl implements ToastService {
     private Context mContext;
 
     @Override
     public void init(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         ARouter.logger.info(getClass().getSimpleName(), getClass().getSimpleName() + " has init.");
     }
 
-    public void sayHello(String name) {
-        ARouter.logger.info("SingleServiceImpl", "sayHello: " + name);
-        Toast.makeText(mContext, "sayHello: " + name, Toast.LENGTH_SHORT).show();
+    @Override
+    public void toast(String message) {
+        ARouter.logger.info("ToastServiceImpl", "toast: " + message);
+        Toast.makeText(mContext, "toast: " + message, Toast.LENGTH_SHORT).show();
     }
 }

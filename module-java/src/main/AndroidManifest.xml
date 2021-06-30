@@ -8,7 +8,7 @@
 
     <application>
         <activity android:name=".JavaActivity" />
-        <activity android:name=".JavaGroup2Activity" />
+        <activity android:name=".JavaGroupActivity" />
     </application>
 
 </manifest>

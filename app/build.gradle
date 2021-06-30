@@ -12,7 +12,8 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+                //AROUTER_GENERATE_DOC: "enable"
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -27,8 +28,8 @@ android {
 
     flavorDimensions "app"
 
-    productFlavors{
-        dev{
+    productFlavors {
+        dev {
             dimension "app"
         }
     }

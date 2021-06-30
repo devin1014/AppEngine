@@ -9,8 +9,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import kotlinx.android.synthetic.main.activity_kotlin.*
 import java.io.Serializable
 
-@Route(path = "/module_kotlin/target1")
-class KotlinActivity : KotlinBaseActivity() {
+@Route(path = "/module_kotlin/target2", group = "kotlin")
+class KotlinGroupActivity : KotlinBaseActivity() {
     @Autowired
     @JvmField
     var key1: String? = null
