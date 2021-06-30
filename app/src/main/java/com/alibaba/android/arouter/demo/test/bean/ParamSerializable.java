@@ -2,22 +2,20 @@ package com.alibaba.android.arouter.demo.test.bean;
 
 import androidx.annotation.NonNull;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import java.io.Serializable;
 
-public class ParamObject {
+public class ParamSerializable implements Serializable {
 
-    @JSONField
     public String name;
-    @JSONField
     public String description;
 
     @SuppressWarnings("unused")
-    public ParamObject() {
+    public ParamSerializable() {
         name = "test";
         description = "test";
     }
 
-    public ParamObject(String name, String description) {
+    public ParamSerializable(String name, String description) {
         this.name = name;
         this.description = description;
     }

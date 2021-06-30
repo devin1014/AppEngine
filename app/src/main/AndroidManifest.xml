@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".test.activity.WebViewActivity" />
-        <activity android:name=".test.activity.TestActivity" />
+        <activity android:name=".test.activity.AutowiredActivity" />
         <activity android:name=".test.activity.FragmentTabsActivity" />
 
     </application>

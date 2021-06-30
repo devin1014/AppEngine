@@ -1,6 +1,7 @@
 package com.alibaba.android.arouter.demo.test.activity;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,23 +13,24 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 /**
  * https://m.aliyun.com/test/activity1?name=老王&age=23&boy=true&high=180
  */
-@Route(path = "/app/activity1", name = "测试用 Activity")
-public class TestActivity extends AppCompatActivity {
+@Route(path = "/app/activity_url", name = "测试用 Activity")
+public class AutowiredActivity extends AppCompatActivity {
 
     @Autowired(desc = "姓名")
-    String name = "jack";
+    String name = "";
 
     @Autowired
-    int age = 10;
+    int age = 0;
 
     @Autowired
-    int height = 175;
+    int height = 0;
 
     @Autowired(name = "boy", required = true)
     boolean girl;
@@ -37,38 +39,39 @@ public class TestActivity extends AppCompatActivity {
     char ch = 'A';
 
     @Autowired
-    float fl = 12.00f;
+    float fl = 0.00f;
 
     @Autowired
-    double dou = 12.01d;
-
-    @Autowired
-    ParamObject ser;
-
-    @Autowired
-    ParamObject pac;
-
-    @Autowired
-    ParamObject obj;
-
-    @Autowired
-    List<ParamObject> objList;
-
-    @Autowired
-    Map<String, List<ParamObject>> map;
+    double dou = 0.00d;
 
     @Autowired
     String url;
 
     @Autowired
+    Serializable ser;
+
+    @Autowired
+    Parcelable pac;
+
+    @Autowired
+    ParamObject obj;
+
+    @Autowired
+    List<ParamObject> list;
+
+    @Autowired
+    Map<String, ParamObject> map;
+
+    @Autowired
     ToastService toastService;
 
-    private long high;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final long high = 0L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test1);
+        setContentView(R.layout.activity_autowired);
 
         ARouter.getInstance().inject(this);
 
@@ -79,25 +82,25 @@ public class TestActivity extends AppCompatActivity {
         // high = getIntent().getLongExtra("high", 0);
         // url = getIntent().getStringExtra("url");
 
-        String params = String.format(
-                "name=%s,\n age=%s, \n height=%s,\n girl=%s,\n high=%s,\n url=%s,\n ser=%s,\n pac=%s,\n obj=%s \n ch=%s \n fl = %s, \n dou = %s, \n objList=%s, \n map=%s",
-                name,
-                age,
-                height,
-                girl,
-                high,
-                url,
-                ser,
-                pac,
-                obj,
-                ch,
-                fl,
-                dou,
-                objList,
-                map
-        );
-        toastService.toast("Hello moto.");
+        ((TextView) findViewById(R.id.content)).setText(
+                String.format(
+                        "name: %s,\nage: %s, \nheight: %s,\ngirl: %s,\nhigh: %s,\nch: %s,\nfl: %s,\ndou: %s,\nurl: %s,\n\nser: %s,\npac: %s,\nobj: %s,\nlist: %s,\nmap: %s",
+                        name,
+                        age,
+                        height,
+                        !girl,
+                        high,
+                        ch,
+                        fl,
+                        dou,
+                        url,
+                        ser,
+                        pac,
+                        obj,
+                        list,
+                        map
+                ));
 
-        ((TextView) findViewById(R.id.content)).setText(params);
+        toastService.toast("Hello moto.");
     }
 }

@@ -16,8 +16,8 @@ import java.lang.reflect.Type;
  * @version 1.0
  * @since 2017/4/10 下午2:10
  */
-@Route(path = "/app/service/json_parser")
-public class JsonServiceImpl implements SerializationService {
+@Route(path = "/app/service/object_parse")
+public class ObjectParseServiceImpl implements SerializationService {
     @Override
     public void init(Context context) {
         ARouter.logger.info(getClass().getSimpleName(), getClass().getSimpleName() + " has init.");

@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 
 import com.alibaba.android.arouter.demo.test.bean.ParamObject;
+import com.alibaba.android.arouter.demo.test.bean.ParamParcelable;
+import com.alibaba.android.arouter.demo.test.bean.ParamSerializable;
 import com.alibaba.android.arouter.demo.test.service.SingleServiceImpl;
 import com.alibaba.android.arouter.demo.test.service.ToastService;
 import com.alibaba.android.arouter.facade.Postcard;
@@ -22,8 +24,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
@@ -37,28 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            // ----------------------------------------------------------------------------
-            // ---- 初始化
-            // ----------------------------------------------------------------------------
-            case R.id.openLog:
-                ARouter.openLog();
-                ARouter.printStackTrace();
-                break;
-            case R.id.openDebug:
-                ARouter.openDebug();
-                break;
-            case R.id.init:
-                // 调试模式不是必须开启，但是为了防止有用户开启了InstantRun，但是
-                // 忘了开调试模式，导致无法使用Demo，如果使用了InstantRun，必须在
-                // 初始化之前开启调试模式，但是上线前需要关闭，InstantRun仅用于开
-                // 发阶段，线上开启调试模式有安全风险，可以使用BuildConfig.DEBUG
-                // 来区分环境
-                ARouter.openDebug();
-                ARouter.init(getApplication());
-                break;
-            case R.id.destroy:
-                ARouter.getInstance().destroy();
-                break;
             // ----------------------------------------------------------------------------
             // ---- 基础功能
             // ----------------------------------------------------------------------------
@@ -74,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .withString("description", "bb")
                         .withString("key1", "value1")
                         .withString("key2", "value2")
-                        .withParcelable("obj", new ParamObject("ccc", "ddd"))
+                        .withObject("obj", new ParamObject("ccc", "ddd"))
                         .navigation(this, 666, new NavCallback() {
                             @Override
                             public void onArrival(Postcard postcard) {
@@ -107,25 +85,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .navigation();
                 break;
             case R.id.autoInject:
-                ParamObject testSerializable = new ParamObject("Titanic", "555");
-                ParamObject testParcelable = new ParamObject("jack", "666");
-                ParamObject testObj = new ParamObject("Rose", "777");
-                List<ParamObject> objList = new ArrayList<>();
-                objList.add(testObj);
+                ArrayList<ParamObject> list = new ArrayList<>();
+                list.add(new ParamObject("DD", "dd"));
 
-                Map<String, List<ParamObject>> map = new HashMap<>();
-                map.put("testMap", objList);
+                HashMap<String, ParamObject> map = new HashMap<>();
+                map.put("key", new ParamObject("EE", "ee"));
 
-                ARouter.getInstance().build("/app/activity1")
+                ARouter.getInstance().build("/app/activity_url")
                         .withString("name", "老王")
                         .withInt("age", 18)
                         .withBoolean("boy", true)
                         .withLong("high", 180)
-                        .withString("url", "https://a.b.c")
-                        .withSerializable("ser", testSerializable)
-                        .withParcelable("pac", testParcelable)
-                        .withObject("obj", testObj)
-                        .withObject("objList", objList)
+                        .withChar("ch", 'c')
+                        .withFloat("fl", 1.0f)
+                        .withDouble("dou", 1.0d)
+                        .withString("url", "https://test.com")
+                        .withSerializable("ser", new ParamSerializable("AA", "aa"))
+                        .withParcelable("pac", new ParamParcelable("BB", "bb"))
+                        .withObject("obj", new ParamObject("CC", "cc"))
+                        .withObject("list", list)
                         .withObject("map", map)
                         .navigation();
                 break;

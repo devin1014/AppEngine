@@ -52,7 +52,7 @@ public class FragmentTabsActivity extends AppCompatActivity {
                 .withString("description", "bb")
                 .withString("key1", "value1")
                 .withString("key2", uri)
-                .withParcelable("obj", new ParamObject("ccc", "ddd"));
+                .withObject("obj", new ParamObject("ccc", "ddd"));
     }
 
     private void showFragment(Fragment fragment) {
