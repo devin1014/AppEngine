@@ -1,4 +1,4 @@
-include ':app'
+include ':demo'
 //include ':arouter-api'
 //include ':arouter-compiler'
 //include ':arouter-annotation'
