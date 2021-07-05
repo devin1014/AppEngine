@@ -6,6 +6,8 @@ import android.os.Handler.Callback
 import android.os.Looper
 import android.os.Message
 import androidx.appcompat.app.AppCompatActivity
+import com.alibaba.android.arouter.app.core.getAppService
+import com.alibaba.android.arouter.app.core.linkToActivity
 import com.alibaba.android.arouter.app.service.AuthService
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Route

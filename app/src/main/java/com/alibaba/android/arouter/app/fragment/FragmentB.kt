@@ -14,12 +14,17 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
 import com.alibaba.android.arouter.app.bean.Game
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import java.util.*
 
 @Route(path = Constants.ROUTER_FRAGMENT_B)
 class FragmentB : BaseFragment() {
+
+    @JvmField
+    @Autowired
+    var position: Int = RecyclerView.NO_POSITION
 
     override fun getContentId(): Int = R.layout.fragment_list
 
@@ -29,6 +34,7 @@ class FragmentB : BaseFragment() {
         view.findViewById<RecyclerView>(R.id.fragment_list).apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = ListAdapter(requireContext())
+            scrollToPosition(position)
         }
         showToast(buildContent())
     }

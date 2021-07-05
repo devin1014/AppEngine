@@ -1,5 +1,6 @@
 package com.alibaba.android.arouter.app.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
+import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 
 abstract class BaseFragment : Fragment() {
@@ -21,12 +24,8 @@ abstract class BaseFragment : Fragment() {
     var value: String? = null
 
     @JvmField
-    @Autowired
-    var path: String? = null
-
-    @JvmField
-    @Autowired
-    var uri: String? = null
+    @Autowired(name = Constants.EXTRA_KEY_DATA_URI)
+    var dataUri: Uri? = null
 
     private val name: String = javaClass.simpleName
 
@@ -35,6 +34,11 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected open fun getContentId() = R.layout.fragment_content
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Utils.printBundleInfo(this)
+    }
 
     protected open fun showToast(msg: String) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
@@ -48,8 +52,7 @@ abstract class BaseFragment : Fragment() {
         return "Fragment: $name" +
                 "\nkey: $key" +
                 "\nvalue: $value" +
-                "\npath: $path" +
-                "\nuri: $uri"
+                "\nuri: $dataUri"
 
     }
 

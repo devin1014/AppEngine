@@ -21,12 +21,13 @@
             </intent-filter>
             <!-- Scheme -->
             <intent-filter>
-                <data
-                    android:scheme="arouter" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="arouter" />
             </intent-filter>
             <!-- App Links -->
             <intent-filter>
@@ -36,19 +37,55 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="router.app.com"
+                    android:host="arouter.app.com"
                     android:scheme="http" />
                 <data
-                    android:host="router.app.com"
+                    android:host="arouter.app.com"
                     android:scheme="https" />
             </intent-filter>
         </activity>
+        <!--<activity-->
+        <!--    android:name=".SchemeFilterActivity"-->
+        <!--    android:theme="@android:style/Theme.NoDisplay">-->
+        <!--    &lt;!&ndash; Scheme &ndash;&gt;-->
+        <!--    <intent-filter>-->
+        <!--        <action android:name="android.intent.action.VIEW" />-->
+
+        <!--        <category android:name="android.intent.category.DEFAULT" />-->
+        <!--        <category android:name="android.intent.category.BROWSABLE" />-->
+
+        <!--        <data-->
+        <!--            android:scheme="arouter" />-->
+        <!--    </intent-filter>-->
+        <!--    &lt;!&ndash; App Links &ndash;&gt;-->
+        <!--    <intent-filter>-->
+        <!--        <action android:name="android.intent.action.VIEW" />-->
+
+        <!--        <category android:name="android.intent.category.DEFAULT" />-->
+        <!--        <category android:name="android.intent.category.BROWSABLE" />-->
+
+        <!--        <data-->
+        <!--            android:host="arouter.app.com"-->
+        <!--            android:scheme="http" />-->
+        <!--        <data-->
+        <!--            android:host="arouter.app.com"-->
+        <!--            android:scheme="https" />-->
+        <!--    </intent-filter>-->
+        <!--</activity>-->
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleTask" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".AccountActivity" />
+
+        <meta-data
+            android:name="arouter_scheme"
+            android:value="arouter" />
+
+        <meta-data
+            android:name="arouter_host"
+            android:value="arouter.app.com" />
 
     </application>
 

@@ -13,5 +13,8 @@ class FragmentC : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         ARouter.getInstance().inject(this)
         setContentText()
+        view.setOnClickListener {
+            ARouter.getInstance().build(Constants.ROUTER_ACTIVITY_ACCOUNT).navigation()
+        }
     }
 }

@@ -8,13 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
-import com.alibaba.android.arouter.launcher.ARouter
 
 abstract class BaseActivity : AppCompatActivity() {
 
     @JvmField
-    @Autowired(name = "_intentDataUri")
-    var intentUri: Uri? = null
+    @Autowired(name = Constants.EXTRA_KEY_DATA_URI)
+    var dataUri: Uri? = null
 
 //    private val intentUriLiveData: MutableLiveData<Uri> = MutableLiveData()
 
@@ -22,6 +21,8 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Utils.printIntentInfo(this)
         setContentView(getContentId())
+        if (supportActionBar != null) supportActionBar?.title = javaClass.simpleName
+        else actionBar?.title = javaClass.simpleName
 //        intentUriLiveData.observe(this, {
 //            onRouter(it)
 //        })
@@ -50,15 +51,18 @@ abstract class BaseActivity : AppCompatActivity() {
     // ----------------------------------------------------------------------
     // ---- Tools
     // ----------------------------------------------------------------------
-    protected open fun showFragment(fragment: Fragment?) {
+    protected open fun addFragment(fragment: Fragment?) {
+        fragment ?: return
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_content, fragment)
+            .commit()
+    }
+
+    protected open fun replaceFragment(fragment: Fragment?) {
         fragment ?: return
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_content, fragment)
             .commit()
-    }
-
-    protected open fun showFragment(path: String) {
-        showFragment(ARouter.getInstance().build(path).navigation() as? Fragment)
     }
 
     protected fun showToast(msg: String) {
