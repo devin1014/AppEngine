@@ -1,7 +1,9 @@
 package com.alibaba.android.arouter.app
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.alibaba.android.arouter.app.core.NLRouter
 import com.alibaba.android.arouter.app.core.getAppService
 import com.alibaba.android.arouter.app.core.linkToActivity
 import com.alibaba.android.arouter.app.service.AuthService
@@ -14,14 +16,16 @@ class LaunchDispatchActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_content)
         Utils.printIntentInfo(this)
-        val path: String = if (getAppService(AuthService::class).initialized) {
-            Constants.ROUTER_ACTIVITY_MAIN
-        } else {
-            Constants.ROUTER_ACTIVITY_SPLASH
-        }
-        linkToActivity(path)
         finish()
+        if (getAppService(AuthService::class).initialized) {
+            if (!NLRouter.route(this)
+                && intent.action == Intent.ACTION_MAIN && intent.hasCategory(Intent.CATEGORY_LAUNCHER)
+            ) { // open main page when user launch app from desktop
+                linkToActivity(Constants.ROUTER_ACTIVITY_MAIN)
+            }
+        } else {
+            linkToActivity(Constants.ROUTER_ACTIVITY_SPLASH)
+        }
     }
 }

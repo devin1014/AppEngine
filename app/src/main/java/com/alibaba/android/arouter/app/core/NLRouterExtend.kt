@@ -23,7 +23,11 @@ fun <T> getAppService(service: Class<out T>): T = ARouter.getInstance().navigati
 // ---- Extras
 // ---------------------------------------------------------------------
 fun Postcard.transferDataUri(intent: Intent): Postcard {
-    if (intent.data != null) withParcelable(Constants.EXTRA_KEY_DATA_URI, intent.data)
+    if (intent.data != null) {
+        NLRouter.buildRouter(intent.data!!)?.run {
+            withSerializable(Constants.EXTRA_KEY_ROUTER_URI, this)
+        }
+    }
     return this
 }
 
