@@ -10,9 +10,9 @@ object Constants {
     const val ROUTER_ACTIVITY_ACCOUNT = "/app/account"
     const val ROUTER_ACTIVITY_DETAIL = "/app/detail"
 
-    const val ROUTER_FRAGMENT_A = "/main/a"
-    const val ROUTER_FRAGMENT_B = "/main/b"
-    const val ROUTER_FRAGMENT_C = "/main/c"
+    const val ROUTER_FRAGMENT_HOME = "/main/home"
+    const val ROUTER_FRAGMENT_SCHEDULE = "/main/schedule"
+    const val ROUTER_FRAGMENT_SETTINGS = "/main/settings"
 
     const val ROUTER_FRAGMENT_AUTH_SIGNIN = "/account/signin"
     const val ROUTER_FRAGMENT_AUTH_REGISTER = "/account/register"

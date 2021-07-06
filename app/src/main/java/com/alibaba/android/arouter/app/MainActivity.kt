@@ -7,14 +7,21 @@ import android.util.Log
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.RadioGroup.OnCheckedChangeListener
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.app.core.linkToFragment
+import com.alibaba.android.arouter.app.widget.FragmentPagerAdapter2
+import com.alibaba.android.arouter.app.widget.TabLayoutCompat
+import com.alibaba.android.arouter.app.widget.TabLayoutCompat.TabLayoutCallback
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.Tab
 
 @Route(path = Constants.ROUTER_ACTIVITY_MAIN)
 class MainActivity : BaseActivity(), OnCheckedChangeListener {
 
-    private val radioGroup: RadioGroup by lazy { findViewById(R.id.radio_group) }
+    private val viewPager: ViewPager2 by lazy { findViewById(R.id.main_view_pager) }
 
     override fun getContentId(): Int = R.layout.activity_main
 
@@ -26,8 +33,23 @@ class MainActivity : BaseActivity(), OnCheckedChangeListener {
     }
 
     private fun initComponent() {
-        radioGroup.setOnCheckedChangeListener(this)
-        radioGroup.check(R.id.radio_fragment_a)
+        val pageTitles = resources.getStringArray(R.array.MAIN_TABS)
+        val pagePaths = arrayOf(Constants.ROUTER_FRAGMENT_HOME, Constants.ROUTER_FRAGMENT_SCHEDULE, Constants.ROUTER_FRAGMENT_SETTINGS)
+        viewPager.adapter = object : FragmentPagerAdapter2(this) {
+            override fun getCount(): Int = pageTitles.size
+
+            override fun getItem(position: Int): Fragment {
+                return ARouter.getInstance().build(pagePaths[position]).navigation() as Fragment
+            }
+
+            override fun getPageTitle(position: Int): CharSequence = pageTitles[position]
+        }
+        val tabLayout = findViewById<TabLayout>(R.id.main_tab_layout)
+        TabLayoutCompat.wrap(tabLayout).setupViewPager2(viewPager, object : TabLayoutCallback {
+            override fun onConfigureTab(tab: Tab, position: Int) {
+                tab.text = pageTitles[position]
+            }
+        })
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -44,13 +66,6 @@ class MainActivity : BaseActivity(), OnCheckedChangeListener {
     override fun onRouter(uri: Uri) {
         Log.i(Constants.TAG_LOG, "onRouter: $uri")
         replaceFragment(linkToFragment(uri))
-//        when (uri.host) {
-//            "main_aa" -> radioGroup.check(R.id.radio_fragment_a)
-//            "main_bb" -> radioGroup.check(R.id.radio_fragment_b)
-//            "main_cc" -> radioGroup.check(R.id.radio_fragment_c)
-//            else -> {
-//            }
-//        }
     }
 
 }

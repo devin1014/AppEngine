@@ -19,8 +19,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import java.util.*
 
-@Route(path = Constants.ROUTER_FRAGMENT_B)
-class FragmentB : BaseFragment() {
+@Route(path = Constants.ROUTER_FRAGMENT_SCHEDULE)
+class ScheduleFragment : BaseFragment() {
 
     @JvmField
     @Autowired

@@ -1,4 +1,4 @@
-package com.alibaba.android.arouter.app.service
+package com.alibaba.android.arouter.app.core
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -11,10 +11,10 @@ import com.alibaba.android.arouter.launcher.ARouter
 @Route(path = "/app/service/nlrouter_path")
 class NLRouterPathService : PathReplaceService {
 
-    private companion object {
-        const val SCHEME_HTTP = "http"
-        const val SCHEME_HTTPS = "https"
-    }
+//    private companion object {
+//        const val SCHEME_HTTP = "http"
+//        const val SCHEME_HTTPS = "https"
+//    }
 
     private var _scheme: String = "arouter"
     private var _host: String = "arouter.app.com"
@@ -32,34 +32,36 @@ class NLRouterPathService : PathReplaceService {
 
     override fun forString(path: String): String {
         return when (path) {
-            "main_aa" -> Constants.ROUTER_FRAGMENT_A
-            "main_bb" -> Constants.ROUTER_FRAGMENT_B
-            "main_cc" -> Constants.ROUTER_FRAGMENT_C
+            "main_home" -> Constants.ROUTER_FRAGMENT_HOME
+            "main_schedule" -> Constants.ROUTER_FRAGMENT_SCHEDULE
+            "main_settings" -> Constants.ROUTER_FRAGMENT_SETTINGS
             else -> path
         }
     }
 
-    override fun forUri(uri: Uri): Uri {
-        if (validUri(uri)) return uri
-        val builder = Uri.Builder().apply {
-            scheme(_scheme)
-            authority(_host)
-            path(uri.host)
-            if (!uri.path.isNullOrEmpty() && uri.path!!.length > 1) {
-                appendPath(uri.path!!.substring(1))
-            }
-            query(uri.query)
-        }
-        val result = builder.build()
-        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService oldUri: $uri")
-        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService newUri: $result")
-        return result
-    }
+    override fun forUri(uri: Uri): Uri = uri
 
-    private fun validUri(uri: Uri): Boolean {
-        if (SCHEME_HTTP != uri.scheme && SCHEME_HTTPS != uri.scheme) return false
-        if (_host != uri.host) return false
-        if (uri.path.isNullOrEmpty() || uri.path!!.length < 3) return false
-        return true
-    }
+//    override fun forUri(uri: Uri): Uri {
+//        if (validUri(uri)) return uri
+//        val builder = Uri.Builder().apply {
+//            scheme(_scheme)
+//            authority(_host)
+//            path(uri.host)
+//            if (!uri.path.isNullOrEmpty() && uri.path!!.length > 1) {
+//                appendPath(uri.path!!.substring(1))
+//            }
+//            query(uri.query)
+//        }
+//        val result = builder.build()
+//        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService oldUri: $uri")
+//        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService newUri: $result")
+//        return result
+//    }
+//
+//    private fun validUri(uri: Uri): Boolean {
+//        if (SCHEME_HTTP != uri.scheme && SCHEME_HTTPS != uri.scheme) return false
+//        if (_host != uri.host) return false
+//        if (uri.path.isNullOrEmpty() || uri.path!!.length < 3) return false
+//        return true
+//    }
 }

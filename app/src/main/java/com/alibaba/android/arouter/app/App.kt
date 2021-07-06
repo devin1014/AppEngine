@@ -10,6 +10,8 @@ import com.alibaba.android.arouter.app.core.NLRouter
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        Log.i(Constants.TAG_LOG, "---------------------------------")
+        Log.i(Constants.TAG_LOG, "${javaClass.simpleName} onCreate")
         NLRouter.init(this)
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

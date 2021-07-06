@@ -6,8 +6,8 @@ import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 
-@Route(path = Constants.ROUTER_FRAGMENT_A)
-class FragmentA : BaseFragment() {
+@Route(path = Constants.ROUTER_FRAGMENT_HOME)
+class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

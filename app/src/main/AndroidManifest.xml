@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NLRouter">
 
+        <!--Launch-->
         <activity
             android:name=".LaunchDispatchActivity"
             android:theme="@android:style/Theme.NoDisplay">
@@ -44,38 +45,13 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <!--<activity-->
-        <!--    android:name=".SchemeFilterActivity"-->
-        <!--    android:theme="@android:style/Theme.NoDisplay">-->
-        <!--    &lt;!&ndash; Scheme &ndash;&gt;-->
-        <!--    <intent-filter>-->
-        <!--        <action android:name="android.intent.action.VIEW" />-->
-
-        <!--        <category android:name="android.intent.category.DEFAULT" />-->
-        <!--        <category android:name="android.intent.category.BROWSABLE" />-->
-
-        <!--        <data-->
-        <!--            android:scheme="arouter" />-->
-        <!--    </intent-filter>-->
-        <!--    &lt;!&ndash; App Links &ndash;&gt;-->
-        <!--    <intent-filter>-->
-        <!--        <action android:name="android.intent.action.VIEW" />-->
-
-        <!--        <category android:name="android.intent.category.DEFAULT" />-->
-        <!--        <category android:name="android.intent.category.BROWSABLE" />-->
-
-        <!--        <data-->
-        <!--            android:host="arouter.app.com"-->
-        <!--            android:scheme="http" />-->
-        <!--        <data-->
-        <!--            android:host="arouter.app.com"-->
-        <!--            android:scheme="https" />-->
-        <!--    </intent-filter>-->
-        <!--</activity>-->
+        <!--Main-->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".SplashActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".AccountActivity" />
 
