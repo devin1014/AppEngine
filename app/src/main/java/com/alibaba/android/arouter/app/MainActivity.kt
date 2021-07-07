@@ -1,7 +1,6 @@
 package com.alibaba.android.arouter.app
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.RadioGroup.OnCheckedChangeListener
@@ -9,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.app.core.NLRouter
 import com.alibaba.android.arouter.app.core.NLRouterUri
-import com.alibaba.android.arouter.app.core.linkToFragment
+import com.alibaba.android.arouter.app.core.buildFragment
 import com.alibaba.android.arouter.app.widget.FragmentPagerAdapter2
 import com.alibaba.android.arouter.app.widget.TabLayoutCompat
 import com.alibaba.android.arouter.app.widget.TabLayoutCompat.TabLayoutCallback
@@ -40,7 +39,7 @@ class MainActivity : BaseActivity(), OnCheckedChangeListener {
             override fun getCount(): Int = pageTitles.size
 
             override fun getItem(position: Int): Fragment {
-                return linkToFragment(pagePaths[position])!!
+                return buildFragment(pagePaths[position])!!
             }
 
             override fun getPageTitle(position: Int): CharSequence = pageTitles[position]
@@ -54,12 +53,12 @@ class MainActivity : BaseActivity(), OnCheckedChangeListener {
     }
 
     override fun onCheckedChanged(group: RadioGroup, checkedId: Int) {
-        val path = group.findViewById<RadioButton>(checkedId).tag as String
-        replaceFragment(linkToFragment(path))
+        val path = pagePaths[group.indexOfChild(group.findViewById<RadioButton>(checkedId))]
+        replaceFragment(buildFragment(path))
     }
 
     override fun onRouter(routerUri: NLRouterUri): Boolean {
-        Log.i(Constants.TAG_LOG, "onRouter: $routerUri")
+        //Log.i(Constants.TAG_LOG, "onRouter: $routerUri")
         viewPager.currentItem = max(pagePaths.indexOf(routerUri.path), 0)
         return true
     }

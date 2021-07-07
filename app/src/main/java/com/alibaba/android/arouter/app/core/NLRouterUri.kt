@@ -25,3 +25,9 @@ class NLRouterUri(val host: String, val path: String = "") : Serializable {
                 "}"
     }
 }
+
+class NLRouterInfo internal constructor() {
+    var activity: String = ""
+    var fragment: String = ""
+    val params: MutableMap<String, Any> = mutableMapOf()
+}

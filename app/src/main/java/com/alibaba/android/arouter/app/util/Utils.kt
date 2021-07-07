@@ -8,9 +8,9 @@ import com.alibaba.android.arouter.app.Constants
 class Utils private constructor() {
     companion object {
 
-        fun printIntentInfo(activity: Activity) {
+        fun printIntentInfo(activity: Activity, functionName: String) {
             Log.i(Constants.TAG_LOG, "---------------------------------")
-            Log.i(Constants.TAG_LOG, "${activity.javaClass.simpleName}, uri: ${activity.intent.data}")
+            Log.i(Constants.TAG_LOG, "${activity.javaClass.simpleName}, $functionName, uri: ${activity.intent.data}")
             activity.intent.extras?.keySet()?.run {
                 Log.i(Constants.TAG_LOG, "extras: ${this.size}")
                 for (key in this) {

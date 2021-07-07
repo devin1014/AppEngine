@@ -1,6 +1,6 @@
 package com.alibaba.android.arouter.app.fragment
 
-import android.content.Context
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
 import com.alibaba.android.arouter.app.bean.Game
+import com.alibaba.android.arouter.app.core.buildActivity
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -32,16 +33,16 @@ class ScheduleFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         ARouter.getInstance().inject(this)
         view.findViewById<RecyclerView>(R.id.fragment_list).apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = ListAdapter(requireContext())
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = ListAdapter(requireActivity())
             scrollToPosition(position)
         }
         showToast(buildContent())
     }
 
-    private class ListAdapter(context: Context) : Adapter<ListHolder>(), OnClickListener {
+    private class ListAdapter(private val activity: Activity) : Adapter<ListHolder>(), OnClickListener {
 
-        private val layoutInflater = LayoutInflater.from(context)
+        private val layoutInflater = LayoutInflater.from(activity)
         private val list = mutableListOf<String>()
 
         init {
@@ -66,10 +67,10 @@ class ScheduleFragment : BaseFragment() {
                 name = "this is test game"
                 date = Date().toString()
             }
-            ARouter.getInstance()
-                .build(Constants.ROUTER_ACTIVITY_DETAIL)
-                .withObject("game", game)
-                .navigation()
+            activity.buildActivity {
+                activity = Constants.ROUTER_ACTIVITY_DETAIL
+                params["game"] = game
+            }
         }
     }
 

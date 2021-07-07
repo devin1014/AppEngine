@@ -2,10 +2,10 @@ package com.alibaba.android.arouter.app.core
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.app.BaseActivity
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.launcher.ARouter
@@ -44,7 +44,24 @@ fun Postcard.transferExtraParams(bundle: Bundle?): Postcard {
     return this
 }
 
-private fun setPostcardData(postcard: Postcard, key: String, value: Any) {
+fun Postcard.transferExtraParams(routerInfo: NLRouterInfo?): Postcard {
+    if (routerInfo != null) {
+        if (routerInfo.fragment.isNotEmpty()) {
+            setPostcardData(this@transferExtraParams, Constants.EXTRA_KEY_FRAGMENT_PATH, routerInfo.fragment)
+        }
+        if (routerInfo.params.isNotEmpty()) {
+            for ((key, value) in routerInfo.params) {
+                // ignore chrome browser data.
+                if (key.startsWith("org.chromium")) continue
+                setPostcardData(this@transferExtraParams, key, value)
+            }
+        }
+    }
+    return this
+}
+
+private fun setPostcardData(postcard: Postcard, key: String, value: Any?) {
+    if (value == null) return
     when (value) {
         is Byte -> postcard.withByte(key, value)
         is Int -> postcard.withInt(key, value)
@@ -63,30 +80,36 @@ private fun setPostcardData(postcard: Postcard, key: String, value: Any) {
 // ---------------------------------------------------------------------
 // ---- Navigate
 // ---------------------------------------------------------------------
-fun Activity.linkToActivity(path: String) {
-    ARouter.getInstance().build(path)
+fun Activity.buildActivity(path: String) {
+    ARouter.getInstance()
+        .build(path)
         .transferDataUri(intent)
         .transferExtraParams(intent.extras)
+        .withString(Constants.EXTRA_KEY_PATH, path)
         .navigation()
 }
 
-fun <T : Fragment> Activity.linkToFragment(path: String): T? {
-    return ARouter.getInstance().build(path)
+fun Activity.buildActivity(lambda: NLRouterInfo.() -> Unit) {
+    val info = NLRouterInfo().apply(lambda)
+    ARouter.getInstance()
+        .build(info.activity)
         .transferDataUri(intent)
         .transferExtraParams(intent.extras)
+        .transferExtraParams(info)
+        .withString(Constants.EXTRA_KEY_PATH, info.activity)
+        .navigation()
+}
+
+fun <T : Fragment> BaseActivity.buildFragment(path: String): T? {
+    return ARouter.getInstance()
+        .build(path)
+        .transferDataUri(intent)
+        .transferExtraParams(intent.extras)
+        .withString(Constants.EXTRA_KEY_PATH, path)
         .navigation() as? T
 }
 
-fun <T : Fragment> Activity.linkToFragment(uri: Uri): T? {
-    return ARouter.getInstance().build(uri)
-        .transferDataUri(intent)
-        .transferExtraParams(intent.extras)
-        .navigation() as? T
-}
-
-//fun <T : Fragment> Fragment.linkToFragment(path: String): T? {
-//    return ARouter.getInstance().build(path)
-//        .transferDataUri(requireActivity().intent)
-//        .transferExtraParams(requireActivity().intent.extras)
-//        .navigation() as? T
+//private fun parseGroup(activity: BaseActivity): String? {
+//    return if (activity._path?.startsWith("/") == true) activity._path?.substring(1)
+//    else activity._path
 //}
