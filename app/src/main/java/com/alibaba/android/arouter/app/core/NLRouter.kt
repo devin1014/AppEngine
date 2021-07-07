@@ -1,53 +1,48 @@
 package com.alibaba.android.arouter.app.core
 
-import android.app.Activity
 import android.app.Application
 import android.net.Uri
 import com.alibaba.android.arouter.app.BuildConfig
-import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.launcher.ARouter
+import java.io.Serializable
 
 object NLRouter {
 
+    const val EXTRA_KEY_PATH = "_path"
+    const val EXTRA_KEY_URI = "_uri"
+    const val EXTRA_KEY_PENDING_DATA = "_pendingData"
+    const val EXTRA_KEY_ROUTER_INFO = "_routerInfo"
+
     interface OnRouter {
-        fun onRouter(routerUri: NLRouterUri): Boolean
+        fun onRouter(routerUri: NLRouterInfo): Boolean
     }
 
-    fun init(context: Application) {
+    interface RouterParser {
+        fun parse(uri: Uri): NLRouterInfo?
+    }
+
+    var parser: RouterParser? = null
+
+    fun init(context: Application, parser: RouterParser? = null) {
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
             //ARouter.printStackTrace()
         }
         ARouter.init(context)
+        this.parser = parser
     }
+}
 
-    fun route(activity: Activity): Boolean {
-        var routerUri: NLRouterUri? = activity.intent.data?.let { buildRouter(it) }
-        if (routerUri == null) {
-            routerUri = activity.intent.getSerializableExtra(Constants.EXTRA_KEY_ROUTER_URI) as? NLRouterUri
-        }
-        if (routerUri != null) {
-            ARouter.getInstance()
-                .build(routerUri.host)
-                .withSerializable(Constants.EXTRA_KEY_ROUTER_URI, routerUri)
-                .navigation()
-            return true
-        }
-        return false
-    }
+class NLRouterInfo internal constructor() : Serializable {
+    var activity: String = ""
+    var fragment: String = ""
+    val params: MutableMap<String, Any> = mutableMapOf()
 
-    fun buildRouter(uri: Uri): NLRouterUri? {
-        val routerUri = when (uri.host) {
-            "main_home" -> NLRouterUri(Constants.ROUTER_ACTIVITY_MAIN, Constants.ROUTER_FRAGMENT_HOME)
-            "main_schedule" -> NLRouterUri(Constants.ROUTER_ACTIVITY_MAIN, Constants.ROUTER_FRAGMENT_SCHEDULE)
-            "main_settings" -> NLRouterUri(Constants.ROUTER_ACTIVITY_MAIN, Constants.ROUTER_FRAGMENT_SETTINGS)
-            "account" -> {
-                val path = if (uri.path?.contains("signIn") == true) Constants.ROUTER_FRAGMENT_AUTH_SIGNIN else Constants.ROUTER_FRAGMENT_AUTH_REGISTER
-                NLRouterUri(Constants.ROUTER_ACTIVITY_ACCOUNT, path)
-            }
-            else -> return null
-        }
-        routerUri.buildQuery(uri)
-        return routerUri
+    override fun toString(): String {
+        return "NLRouterInfo{ " +
+                "activity=$activity, " +
+                "fragment=$fragment, " +
+                "params=$params " +
+                "}"
     }
 }

@@ -9,23 +9,39 @@
     tools:ignore="HardcodedText,SpUsage">
 
     <Button
-        android:id="@+id/settings_signin"
+        android:id="@+id/settings_btn_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="2dp"
+        android:padding="4dp"
         android:text="SignIn"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="14dp" />
 
     <Button
-        android:id="@+id/settings_register"
+        android:id="@+id/settings_btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:padding="2dp"
+        android:padding="4dp"
         android:text="Register"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="14dp"
         tools:ignore="RtlHardcoded" />
+
+    <Button
+        android:id="@+id/settings_btn_purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:padding="4dp"
+        android:text="Purchase"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:visibility="gone"
+        android:textSize="14dp"
+        tools:ignore="RtlHardcoded" />
+
 
 </LinearLayout>

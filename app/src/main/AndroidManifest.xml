@@ -45,15 +45,20 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+        <!--Splash-->
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <!--Main-->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".AccountActivity" />
+            android:name=".DetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".AccountActivity"
+            android:launchMode="singleTop" />
 
         <meta-data
             android:name="arouter_scheme"

@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.app.core.NLRouter
-import com.alibaba.android.arouter.app.core.NLRouterUri
+import com.alibaba.android.arouter.app.core.NLRouterInfo
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 
@@ -22,6 +22,10 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
     @Autowired
     var _uri: Uri? = null
 
+    @JvmField
+    @Autowired
+    var _routerInfo: NLRouterInfo? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Utils.printIntentInfo(this, "onCreate")
@@ -32,16 +36,29 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
 
     protected open fun getContentId() = R.layout.activity_content
 
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        val pendingData: Uri? = intent.getParcelableExtra(NLRouter.EXTRA_KEY_PENDING_DATA)
+        val routerInfo: NLRouterInfo? = if (pendingData != null) {
+            NLRouter.parser?.parse(pendingData)
+        } else {
+            intent.getSerializableExtra(NLRouter.EXTRA_KEY_ROUTER_INFO) as? NLRouterInfo
+        }
+        if (routerInfo != null) {
+            onRouter(routerInfo)
+        }
+    }
+
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
         Utils.printIntentInfo(this, "onNewIntent")
-        (intent.getSerializableExtra(Constants.EXTRA_KEY_ROUTER_URI) as? NLRouterUri)?.run {
+        (intent.getSerializableExtra(NLRouter.EXTRA_KEY_ROUTER_INFO) as? NLRouterInfo)?.run {
             onRouter(this)
         }
     }
 
-    override fun onRouter(routerUri: NLRouterUri): Boolean = false
+    override fun onRouter(routerUri: NLRouterInfo): Boolean = false
 
     // ----------------------------------------------------------------------
     // ---- Tools

@@ -1,5 +1,6 @@
 package com.alibaba.android.arouter.app.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
-import com.alibaba.android.arouter.app.core.NLRouterUri
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 
@@ -17,15 +16,11 @@ abstract class BaseFragment : Fragment() {
 
     @JvmField
     @Autowired
-    var key: String? = null
+    var _path: String? = null
 
     @JvmField
     @Autowired
-    var value: String? = null
-
-    @JvmField
-    @Autowired(name = Constants.EXTRA_KEY_ROUTER_URI)
-    var routerUri: NLRouterUri? = null
+    var _uri: Uri? = null
 
     private val name: String = javaClass.simpleName
 
@@ -49,11 +44,9 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected fun buildContent(): String {
-        return "Fragment: $name" +
-                "\nkey: $key" +
-                "\nvalue: $value" +
-                "\nrouterUri: $routerUri"
-
+        return "Fragment: $name\n" +
+                "path: $_path\n" +
+                "uri: $_uri\n"
     }
 
 }

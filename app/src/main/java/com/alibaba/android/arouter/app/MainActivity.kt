@@ -6,8 +6,7 @@ import android.widget.RadioGroup
 import android.widget.RadioGroup.OnCheckedChangeListener
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.app.core.NLRouter
-import com.alibaba.android.arouter.app.core.NLRouterUri
+import com.alibaba.android.arouter.app.core.NLRouterInfo
 import com.alibaba.android.arouter.app.core.buildFragment
 import com.alibaba.android.arouter.app.widget.FragmentPagerAdapter2
 import com.alibaba.android.arouter.app.widget.TabLayoutCompat
@@ -30,7 +29,6 @@ class MainActivity : BaseActivity(), OnCheckedChangeListener {
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
         initComponent()
-        NLRouter.route(this)
     }
 
     private fun initComponent() {
@@ -57,9 +55,8 @@ class MainActivity : BaseActivity(), OnCheckedChangeListener {
         replaceFragment(buildFragment(path))
     }
 
-    override fun onRouter(routerUri: NLRouterUri): Boolean {
-        //Log.i(Constants.TAG_LOG, "onRouter: $routerUri")
-        viewPager.currentItem = max(pagePaths.indexOf(routerUri.path), 0)
+    override fun onRouter(routerUri: NLRouterInfo): Boolean {
+        viewPager.currentItem = max(pagePaths.indexOf(routerUri.fragment), 0)
         return true
     }
 

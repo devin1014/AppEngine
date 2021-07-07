@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity(), Callback {
     override fun handleMessage(msg: Message): Boolean {
         getAppService(AuthService::class).initialized = true
         finish()
-        buildActivity(Constants.ROUTER_ACTIVITY_MAIN)
+        buildActivity(Constants.ROUTER_ACTIVITY_MAIN, true)
         return true
     }
 

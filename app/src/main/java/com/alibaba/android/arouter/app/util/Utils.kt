@@ -9,8 +9,10 @@ class Utils private constructor() {
     companion object {
 
         fun printIntentInfo(activity: Activity, functionName: String) {
-            Log.i(Constants.TAG_LOG, "---------------------------------")
-            Log.i(Constants.TAG_LOG, "${activity.javaClass.simpleName}, $functionName, uri: ${activity.intent.data}")
+            Log.i(Constants.TAG_LOG, "    ")
+            Log.i(Constants.TAG_LOG, "------------------------------------------------------------------")
+            Log.i(Constants.TAG_LOG, "---- ${activity.javaClass.simpleName}")
+            Log.i(Constants.TAG_LOG, "$functionName, uri: ${activity.intent.data}")
             activity.intent.extras?.keySet()?.run {
                 Log.i(Constants.TAG_LOG, "extras: ${this.size}")
                 for (key in this) {
@@ -21,8 +23,9 @@ class Utils private constructor() {
         }
 
         fun printBundleInfo(fragment: Fragment) {
-            Log.i(Constants.TAG_LOG, "---------------------------------")
-            Log.i(Constants.TAG_LOG, fragment.javaClass.simpleName)
+            Log.i(Constants.TAG_LOG, "    ")
+            Log.i(Constants.TAG_LOG, "------------------------------------------------------------------")
+            Log.i(Constants.TAG_LOG, "---- ${fragment.javaClass.simpleName}")
             fragment.arguments?.keySet()?.run {
                 Log.i(Constants.TAG_LOG, "extras: ${this.size}")
                 for (key in this) {

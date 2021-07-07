@@ -21,13 +21,14 @@ class SettingsFragment : BaseFragment() {
         val onClickListener = OnClickListener {
             requireActivity().buildActivity {
                 activity = Constants.ROUTER_ACTIVITY_ACCOUNT
-                fragment = if (it.id == R.id.auth_btn_signin)
+                fragment = if (it.id == R.id.settings_btn_signin)
                     Constants.ROUTER_FRAGMENT_AUTH_SIGNIN
                 else
                     Constants.ROUTER_FRAGMENT_AUTH_REGISTER
             }
         }
-        view.findViewById<Button>(R.id.settings_signin).setOnClickListener(onClickListener)
-        view.findViewById<Button>(R.id.settings_register).setOnClickListener(onClickListener)
+        view.findViewById<Button>(R.id.settings_btn_signin).setOnClickListener(onClickListener)
+        view.findViewById<Button>(R.id.settings_btn_register).setOnClickListener(onClickListener)
+        view.findViewById<Button>(R.id.settings_btn_purchase).setOnClickListener(onClickListener)
     }
 }
