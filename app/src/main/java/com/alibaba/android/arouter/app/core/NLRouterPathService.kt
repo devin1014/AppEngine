@@ -1,12 +1,11 @@
 //package com.alibaba.android.arouter.app.core
 //
 //import android.content.Context
-//import android.content.pm.PackageManager
 //import android.net.Uri
 //import com.alibaba.android.arouter.app.Constants
+//import com.alibaba.android.arouter.app.service.AuthService
 //import com.alibaba.android.arouter.facade.annotation.Route
 //import com.alibaba.android.arouter.facade.service.PathReplaceService
-//import com.alibaba.android.arouter.launcher.ARouter
 //
 //@Route(path = "/app/service/nlrouter_path")
 //class NLRouterPathService : PathReplaceService {
@@ -16,25 +15,26 @@
 ////        const val SCHEME_HTTPS = "https"
 ////    }
 //
-//    private var _scheme: String = "arouter"
-//    private var _host: String = "arouter.app.com"
+////    private var _scheme: String = "arouter"
+////    private var _host: String = "arouter.app.com"
 //
 //    override fun init(context: Context) {
-//        try {
-//            val appInfo = context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
-//            _scheme = appInfo.metaData.getString("arouter_scheme", _scheme)
-//            _host = appInfo.metaData.getString("arouter_host", _host)
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService init, scheme=$_scheme ,host=$_host ")
+////        try {
+////            val appInfo = context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
+////            _scheme = appInfo.metaData.getString("arouter_scheme", _scheme)
+////            _host = appInfo.metaData.getString("arouter_host", _host)
+////        } catch (e: Exception) {
+////            e.printStackTrace()
+////        }
+////        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService init, scheme=$_scheme ,host=$_host ")
 //    }
 //
 //    override fun forString(path: String): String {
 //        return when (path) {
-//            "main_home" -> Constants.ROUTER_FRAGMENT_HOME
-//            "main_schedule" -> Constants.ROUTER_FRAGMENT_SCHEDULE
-//            "main_settings" -> Constants.ROUTER_FRAGMENT_SETTINGS
+//            Constants.ROUTER_FRAGMENT_AUTH_SIGNIN -> {
+//                if (getAppService(AuthService::class).authenticated) Constants.ROUTER_FRAGMENT_AUTH_INFO
+//                else Constants.ROUTER_FRAGMENT_AUTH_SIGNIN
+//            }
 //            else -> path
 //        }
 //    }

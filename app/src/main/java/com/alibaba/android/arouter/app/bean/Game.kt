@@ -1,15 +1,17 @@
 package com.alibaba.android.arouter.app.bean
 
-class Game {
+import java.io.Serializable
+
+class Game : Serializable {
     var id: String? = null
     var name: String? = null
     var date: String? = null
 
     override fun toString(): String {
-        return "Game{" +
-                "\n    id: $id" +
-                "\n    name: $name" +
-                "\n    date: $date" +
-                "\n}"
+        return "Game{ " +
+                "id:\'$id\', " +
+                "name:\'$name\', " +
+                "date:\'$date\' " +
+                "}"
     }
 }

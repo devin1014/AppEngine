@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.app.R
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 
+@Suppress("PropertyName")
 abstract class BaseFragment : Fragment() {
 
     @JvmField
@@ -39,8 +40,8 @@ abstract class BaseFragment : Fragment() {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
-    protected fun setContentText() {
-        (view as? TextView)?.text = buildContent()
+    protected fun setContentText(text: String = buildContent()) {
+        (view as? TextView)?.text = text
     }
 
     protected fun buildContent(): String {

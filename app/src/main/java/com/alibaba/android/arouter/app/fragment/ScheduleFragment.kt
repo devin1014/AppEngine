@@ -18,6 +18,7 @@ import com.alibaba.android.arouter.app.core.buildActivity
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import java.text.SimpleDateFormat
 import java.util.*
 
 @Route(path = Constants.ROUTER_FRAGMENT_SCHEDULE)
@@ -37,11 +38,11 @@ class ScheduleFragment : BaseFragment() {
             adapter = ListAdapter(requireActivity())
             scrollToPosition(position)
         }
-        showToast(buildContent())
     }
 
     private class ListAdapter(private val activity: Activity) : Adapter<ListHolder>(), OnClickListener {
 
+        private val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US)
         private val layoutInflater = LayoutInflater.from(activity)
         private val list = mutableListOf<String>()
 
@@ -65,7 +66,7 @@ class ScheduleFragment : BaseFragment() {
             val game = Game().apply {
                 id = "ext_${v.tag as String}"
                 name = "this is test game"
-                date = Date().toString()
+                date = dateFormat.format(Date())
             }
             activity.buildActivity {
                 activity = Constants.ROUTER_ACTIVITY_DETAIL

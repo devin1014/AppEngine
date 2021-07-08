@@ -36,13 +36,14 @@ object NLRouter {
 class NLRouterInfo internal constructor() : Serializable {
     var activity: String = ""
     var fragment: String = ""
+
+    @Transient
     val params: MutableMap<String, Any> = mutableMapOf()
 
     override fun toString(): String {
         return "NLRouterInfo{ " +
-                "activity=$activity, " +
-                "fragment=$fragment, " +
-                "params=$params " +
+                "activity:\'$activity\', " +
+                "fragment:\'$fragment\' " +
                 "}"
     }
 }

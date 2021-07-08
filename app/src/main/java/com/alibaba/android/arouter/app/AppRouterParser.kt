@@ -34,10 +34,21 @@ class AppRouterParser : RouterParser {
         if (routerInfo != null && !uri.query.isNullOrEmpty()) {
             for (key in uri.queryParameterNames) {
                 uri.getQueryParameter(key)?.run {
-                    routerInfo.params[key] = this
+                    routerInfo.params[key] = parseQueryObjectType(uri.host, key, this)
                 }
             }
         }
         return routerInfo
+    }
+
+    private fun parseQueryObjectType(host: String?, key: String, value: String): Any {
+        if ("main_schedule" == host && key == "position") {
+            return try {
+                value.toInt()
+            } catch (e: Exception) {
+                "0"
+            }
+        }
+        return value
     }
 }
