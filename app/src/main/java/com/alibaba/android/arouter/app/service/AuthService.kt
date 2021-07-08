@@ -1,6 +1,9 @@
 package com.alibaba.android.arouter.app.service
 
 import android.content.Context
+import android.content.Intent
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.facade.template.IProvider
 
@@ -25,9 +28,10 @@ class AuthServiceImpl : AuthService {
         get() = _authenticated
         set(value) {
             _authenticated = value
+            LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(Intent(Constants.ACTION_AUTH_CHANGED))
         }
 
-    private var applicationContext: Context? = null
+    private lateinit var applicationContext: Context
 
     override fun init(context: Context) {
         applicationContext = context.applicationContext

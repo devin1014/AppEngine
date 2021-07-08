@@ -3,6 +3,8 @@ package com.alibaba.android.arouter.app
 object Constants {
     const val TAG_LOG = "NLRouter"
 
+    const val ACTION_AUTH_CHANGED = "action.auth.changed"
+
     //    activity
     const val ROUTER_ACTIVITY_SPLASH = "/app/splash"
     const val ROUTER_ACTIVITY_MAIN = "/app/main"

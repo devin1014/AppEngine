@@ -8,7 +8,6 @@ import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
 import com.alibaba.android.arouter.app.core.buildActivity
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 
 @Route(path = Constants.ROUTER_FRAGMENT_SETTINGS)
 class SettingsFragment : BaseFragment() {
@@ -17,7 +16,6 @@ class SettingsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ARouter.getInstance().inject(this)
         val onClickListener = OnClickListener {
             requireActivity().buildActivity {
                 activity = Constants.ROUTER_ACTIVITY_ACCOUNT

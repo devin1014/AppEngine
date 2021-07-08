@@ -1,15 +1,20 @@
 package com.alibaba.android.arouter.app
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.alibaba.android.arouter.app.core.NLRouter
 import com.alibaba.android.arouter.app.core.NLRouterInfo
 import com.alibaba.android.arouter.app.core.NLRouterParseService
 import com.alibaba.android.arouter.app.core.getAppService
+import com.alibaba.android.arouter.app.service.AuthService
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
@@ -25,13 +30,25 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
     @Autowired
     var _routerInfo: NLRouterInfo? = null
 
+    private val authChangedReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            setActionBarTitle()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LocalBroadcastManager.getInstance(this).registerReceiver(authChangedReceiver, IntentFilter(Constants.ACTION_AUTH_CHANGED))
         Utils.printIntentInfo(this, "onCreate")
         ARouter.getInstance().inject(this)
         setContentView(getContentId())
-        if (supportActionBar != null) supportActionBar?.title = javaClass.simpleName
-        else actionBar?.title = javaClass.simpleName
+        setActionBarTitle()
+    }
+
+    protected fun setActionBarTitle() {
+        val title = "${javaClass.simpleName} Auth:${getAppService(AuthService::class).authenticated}"
+        if (supportActionBar != null) supportActionBar?.title = title
+        else actionBar?.title = title
     }
 
     protected open fun getContentId() = R.layout.activity_content
@@ -60,6 +77,11 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
     }
 
     override fun onRouter(routerUri: NLRouterInfo): Boolean = false
+
+    override fun onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(authChangedReceiver)
+        super.onDestroy()
+    }
 
     // ----------------------------------------------------------------------
     // ---- Tools

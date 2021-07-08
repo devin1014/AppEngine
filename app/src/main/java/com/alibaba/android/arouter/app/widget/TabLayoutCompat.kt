@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayout.Tab
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 
-class TabLayoutCompat private constructor(val tabLayout: TabLayout) {
+class TabLayoutCompat private constructor(private val tabLayout: TabLayout) {
     companion object {
         fun wrap(tabLayout: TabLayout): TabLayoutCompat = TabLayoutCompat(tabLayout)
     }
