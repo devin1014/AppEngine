@@ -1,12 +1,17 @@
-package com.alibaba.android.arouter.app
+package com.alibaba.android.arouter.app.service
 
 import android.net.Uri
-import com.alibaba.android.arouter.app.core.NLRouter.RouterParser
+import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.core.NLRouterInfo
+import com.alibaba.android.arouter.app.core.NLRouterParseService
+import com.alibaba.android.arouter.facade.annotation.Route
 
-class AppRouterParser : RouterParser {
+@Route(path = "/app/service/router_parse")
+class RouterParseServiceImpl : NLRouterParseService {
 
-    override fun parse(uri: Uri): NLRouterInfo? {
+    override var scheme: String = "scheme"
+
+    override fun parseRouterUri(uri: Uri): NLRouterInfo? {
         val routerInfo: NLRouterInfo? = when (uri.host) {
             "main_home" -> NLRouterInfo().apply {
                 activity = Constants.ROUTER_ACTIVITY_MAIN

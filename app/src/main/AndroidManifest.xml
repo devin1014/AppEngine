@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="arouter" />
+                    android:scheme="${routerScheme}" />
             </intent-filter>
             <!-- App Links -->
             <intent-filter>
@@ -38,10 +38,10 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="arouter.app.com"
+                    android:host="${routerHost}"
                     android:scheme="http" />
                 <data
-                    android:host="arouter.app.com"
+                    android:host="${routerHost}"
                     android:scheme="https" />
             </intent-filter>
         </activity>
@@ -61,12 +61,12 @@
             android:launchMode="singleTop" />
 
         <meta-data
-            android:name="arouter_scheme"
-            android:value="arouter" />
+            android:name="routerScheme"
+            android:value="${routerScheme}" />
 
         <meta-data
-            android:name="arouter_host"
-            android:value="arouter.app.com" />
+            android:name="routerHost"
+            android:value="${routerHost}" />
 
     </application>
 

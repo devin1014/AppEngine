@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.app.core.NLRouter
 import com.alibaba.android.arouter.app.core.NLRouterInfo
+import com.alibaba.android.arouter.app.core.NLRouterParseService
+import com.alibaba.android.arouter.app.core.getAppService
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.alibaba.android.arouter.launcher.ARouter
 
 @Suppress("PropertyName")
 abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
@@ -20,15 +23,12 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
 
     @JvmField
     @Autowired
-    var _uri: Uri? = null
-
-    @JvmField
-    @Autowired
     var _routerInfo: NLRouterInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Utils.printIntentInfo(this, "onCreate")
+        ARouter.getInstance().inject(this)
         setContentView(getContentId())
         if (supportActionBar != null) supportActionBar?.title = javaClass.simpleName
         else actionBar?.title = javaClass.simpleName
@@ -40,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
         super.onPostCreate(savedInstanceState)
         val pendingData: Uri? = intent.getParcelableExtra(NLRouter.EXTRA_KEY_PENDING_DATA)
         val routerInfo: NLRouterInfo? = if (pendingData != null) {
-            NLRouter.parser?.parse(pendingData)
+            getAppService(NLRouterParseService::class).parse(pendingData)
         } else {
             intent.getSerializableExtra(NLRouter.EXTRA_KEY_ROUTER_INFO) as? NLRouterInfo
         }
@@ -53,6 +53,7 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
         super.onNewIntent(intent)
         setIntent(intent)
         Utils.printIntentInfo(this, "onNewIntent")
+        ARouter.getInstance().inject(this)
         (intent.getSerializableExtra(NLRouter.EXTRA_KEY_ROUTER_INFO) as? NLRouterInfo)?.run {
             onRouter(this)
         }

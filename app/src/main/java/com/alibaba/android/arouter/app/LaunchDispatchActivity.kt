@@ -3,8 +3,8 @@ package com.alibaba.android.arouter.app
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import com.alibaba.android.arouter.app.core.NLRouter
 import com.alibaba.android.arouter.app.core.NLRouterInfo
+import com.alibaba.android.arouter.app.core.NLRouterParseService
 import com.alibaba.android.arouter.app.core.buildActivity
 import com.alibaba.android.arouter.app.core.getAppService
 import com.alibaba.android.arouter.app.service.AuthService
@@ -24,7 +24,9 @@ class LaunchDispatchActivity : FragmentActivity() {
             ) { // open main page when user launch app from desktop
                 buildActivity(Constants.ROUTER_ACTIVITY_MAIN)
             } else {
-                val routerInfo: NLRouterInfo? = intent.data?.let { NLRouter.parser?.parse(it) }
+                val routerInfo: NLRouterInfo? = intent.data?.let { uri ->
+                    getAppService(NLRouterParseService::class).parse(uri)
+                }
                 if (routerInfo != null) {
                     buildActivity(routerInfo)
                 }

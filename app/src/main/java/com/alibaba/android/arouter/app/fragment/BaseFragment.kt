@@ -1,6 +1,5 @@
 package com.alibaba.android.arouter.app.fragment
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +17,6 @@ abstract class BaseFragment : Fragment() {
     @JvmField
     @Autowired
     var _path: String? = null
-
-    @JvmField
-    @Autowired
-    var _uri: Uri? = null
 
     private val name: String = javaClass.simpleName
 
@@ -46,8 +41,7 @@ abstract class BaseFragment : Fragment() {
 
     protected fun buildContent(): String {
         return "Fragment: $name\n" +
-                "path: $_path\n" +
-                "uri: $_uri\n"
+                "path: $_path\n"
     }
 
 }

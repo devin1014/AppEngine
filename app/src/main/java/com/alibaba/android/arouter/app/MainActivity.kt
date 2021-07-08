@@ -12,7 +12,6 @@ import com.alibaba.android.arouter.app.widget.FragmentPagerAdapter2
 import com.alibaba.android.arouter.app.widget.TabLayoutCompat
 import com.alibaba.android.arouter.app.widget.TabLayoutCompat.TabLayoutCallback
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 import kotlin.math.max
@@ -27,7 +26,6 @@ class MainActivity : BaseActivity(), OnCheckedChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ARouter.getInstance().inject(this)
         initComponent()
     }
 

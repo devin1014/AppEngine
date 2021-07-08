@@ -14,6 +14,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [routerScheme: "arouter", routerHost:"arouter.app.com"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

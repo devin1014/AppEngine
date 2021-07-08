@@ -43,6 +43,6 @@ class App : Application() {
             }
         })
 
-        NLRouter.init(this, AppRouterParser())
+        NLRouter.init(this)
     }
 }
