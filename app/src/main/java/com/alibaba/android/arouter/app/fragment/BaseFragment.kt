@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.app.R
+import com.alibaba.android.arouter.app.core.NLRouter.OnRouter
+import com.alibaba.android.arouter.app.core.NLRouterInfo
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
+import java.util.*
 
 @Suppress("PropertyName")
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), OnRouter {
 
     @JvmField
     @Autowired
@@ -33,6 +37,15 @@ abstract class BaseFragment : Fragment() {
         ARouter.getInstance().inject(this)
     }
 
+    @CallSuper
+    override fun onRouter(routerUri: NLRouterInfo): Boolean {
+        if (routerUri.fragment == _path) {
+            ARouter.getInstance().inject(this)
+            return true
+        }
+        return false
+    }
+
     protected open fun showToast(msg: String) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
@@ -44,7 +57,7 @@ abstract class BaseFragment : Fragment() {
     protected fun buildContent(): String {
         return with(StringBuilder(name)) {
             arguments?.keySet()?.run {
-                for (key in this) {
+                for (key in TreeSet(this)) {
                     append("\n$key=${arguments?.get(key)}")
                 }
             }

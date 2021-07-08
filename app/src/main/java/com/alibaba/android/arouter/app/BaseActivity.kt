@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.alibaba.android.arouter.app.core.NLRouter
+import com.alibaba.android.arouter.app.core.NLRouter.OnRouter
 import com.alibaba.android.arouter.app.core.NLRouterInfo
 import com.alibaba.android.arouter.app.core.NLRouterParseService
 import com.alibaba.android.arouter.app.core.getAppService
@@ -20,7 +21,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
 
 @Suppress("PropertyName")
-abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
+abstract class BaseActivity : AppCompatActivity(), OnRouter {
 
     @JvmField
     @Autowired
@@ -62,7 +63,7 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
             intent.getSerializableExtra(NLRouter.EXTRA_KEY_ROUTER_INFO) as? NLRouterInfo
         }
         if (routerInfo != null) {
-            onRouter(routerInfo)
+            handleRouter(routerInfo)
         }
     }
 
@@ -72,7 +73,15 @@ abstract class BaseActivity : AppCompatActivity(), NLRouter.OnRouter {
         Utils.printIntentInfo(this, "onNewIntent")
         ARouter.getInstance().inject(this)
         (intent.getSerializableExtra(NLRouter.EXTRA_KEY_ROUTER_INFO) as? NLRouterInfo)?.run {
-            onRouter(this)
+            handleRouter(this)
+        }
+    }
+
+    private fun handleRouter(routerInfo: NLRouterInfo) {
+        if (!onRouter(routerInfo)) {
+            supportFragmentManager.fragments.forEach {
+                if (it is OnRouter && it.onRouter(routerInfo)) return@forEach
+            }
         }
     }
 

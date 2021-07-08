@@ -1,9 +1,6 @@
 package com.alibaba.android.arouter.app
 
 import android.os.Bundle
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.RadioGroup.OnCheckedChangeListener
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.app.core.NLRouterInfo
@@ -16,8 +13,8 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 import kotlin.math.max
 
-@Route(path = Constants.ROUTER_ACTIVITY_MAIN)
-class MainActivity : BaseActivity(), OnCheckedChangeListener {
+@Route(path = Constants.ROUTER_ACTIVITY_MAIN, group = "test2222")
+class MainActivity : BaseActivity() {
 
     private val pagePaths = listOf(Constants.ROUTER_FRAGMENT_HOME, Constants.ROUTER_FRAGMENT_SCHEDULE, Constants.ROUTER_FRAGMENT_SETTINGS)
     private val viewPager: ViewPager2 by lazy { findViewById(R.id.main_view_pager) }
@@ -46,11 +43,6 @@ class MainActivity : BaseActivity(), OnCheckedChangeListener {
                 tab.text = pageTitles[position]
             }
         })
-    }
-
-    override fun onCheckedChanged(group: RadioGroup, checkedId: Int) {
-        val path = pagePaths[group.indexOfChild(group.findViewById<RadioButton>(checkedId))]
-        replaceFragment(buildFragment(path))
     }
 
     override fun onRouter(routerUri: NLRouterInfo): Boolean {

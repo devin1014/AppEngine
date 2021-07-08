@@ -54,6 +54,9 @@
             android:name=".MainActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".MainActivity2"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".DetailActivity"
             android:launchMode="singleTop" />
         <activity
