@@ -51,10 +51,10 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <!--Main-->
         <activity
-            android:name=".MainActivity"
+            android:name=".MainViewPager2Activity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".MainFrameLayoutActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".DetailActivity"

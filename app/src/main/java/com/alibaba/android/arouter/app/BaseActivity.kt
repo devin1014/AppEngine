@@ -15,7 +15,6 @@ import com.alibaba.android.arouter.app.core.Router.OnRouter
 import com.alibaba.android.arouter.app.core.RouterInfo
 import com.alibaba.android.arouter.app.core.RouterParseService
 import com.alibaba.android.arouter.app.core.getAppService
-import com.alibaba.android.arouter.app.service.AuthService
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
@@ -47,7 +46,7 @@ abstract class BaseActivity : AppCompatActivity(), OnRouter {
     }
 
     protected fun setActionBarTitle() {
-        val title = "${javaClass.simpleName} Auth:${getAppService(AuthService::class).authenticated}"
+        val title = javaClass.simpleName
         if (supportActionBar != null) supportActionBar?.title = title
         else actionBar?.title = title
     }

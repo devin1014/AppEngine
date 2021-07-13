@@ -8,14 +8,14 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayout.Tab
 
-@Route(path = Constants.ROUTER_ACTIVITY_MAIN)
-class MainActivity2 : BaseActivity(), OnTabSelectedListener {
+@Route(path = Constants.ROUTER_ACTIVITY_MAIN, group = Constants.GROUP_FRAME_LAYOUT)
+class MainFrameLayoutActivity : BaseActivity(), OnTabSelectedListener {
 
     private val pagePaths = listOf(Constants.ROUTER_FRAGMENT_HOME, Constants.ROUTER_FRAGMENT_SCHEDULE, Constants.ROUTER_FRAGMENT_SETTINGS)
     private val tabLayout: TabLayout by lazy { findViewById(R.id.main_tab_layout) }
     private val tabMap = mutableMapOf<String, Tab>()
 
-    override fun getContentId(): Int = R.layout.activity_main2
+    override fun getContentId(): Int = R.layout.activity_main_framelayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

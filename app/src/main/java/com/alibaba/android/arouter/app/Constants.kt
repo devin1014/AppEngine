@@ -1,13 +1,17 @@
 package com.alibaba.android.arouter.app
 
 object Constants {
-    const val TAG_LOG = "NLRouter"
+    const val TAG_LOG = "Router"
+
+    const val GROUP_VIEWPAGER2 = "viewpager2"
+    const val GROUP_FRAME_LAYOUT = "frame_layout"
+    private const val GROUP_MAIN = GROUP_VIEWPAGER2
 
     const val ACTION_AUTH_CHANGED = "action.auth.changed"
 
     //    activity
     const val ROUTER_ACTIVITY_SPLASH = "/app/splash"
-    const val ROUTER_ACTIVITY_MAIN = "/app/main"
+    const val ROUTER_ACTIVITY_MAIN = "/$GROUP_MAIN/main"
     const val ROUTER_ACTIVITY_ACCOUNT = "/app/account"
     const val ROUTER_ACTIVITY_DETAIL = "/app/detail"
 

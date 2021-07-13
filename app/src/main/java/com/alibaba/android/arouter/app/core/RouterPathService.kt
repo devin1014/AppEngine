@@ -26,7 +26,7 @@
 ////        } catch (e: Exception) {
 ////            e.printStackTrace()
 ////        }
-////        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService init, scheme=$_scheme ,host=$_host ")
+////        ARouter.logger.info(Constants.TAG_LOG, "RouterPathService init, scheme=$_scheme ,host=$_host ")
 //    }
 //
 //    override fun forString(path: String): String {
@@ -53,8 +53,8 @@
 ////            query(uri.query)
 ////        }
 ////        val result = builder.build()
-////        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService oldUri: $uri")
-////        ARouter.logger.info(Constants.TAG_LOG, "NLRouterPathService newUri: $result")
+////        ARouter.logger.info(Constants.TAG_LOG, "RouterPathService oldUri: $uri")
+////        ARouter.logger.info(Constants.TAG_LOG, "RouterPathService newUri: $result")
 ////        return result
 ////    }
 ////

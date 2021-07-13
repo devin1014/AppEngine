@@ -13,13 +13,13 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 import kotlin.math.max
 
-@Route(path = Constants.ROUTER_ACTIVITY_MAIN, group = "test2222")
-class MainActivity : BaseActivity() {
+@Route(path = Constants.ROUTER_ACTIVITY_MAIN, group = Constants.GROUP_VIEWPAGER2)
+class MainViewPager2Activity : BaseActivity() {
 
     private val pagePaths = listOf(Constants.ROUTER_FRAGMENT_HOME, Constants.ROUTER_FRAGMENT_SCHEDULE, Constants.ROUTER_FRAGMENT_SETTINGS)
     private val viewPager: ViewPager2 by lazy { findViewById(R.id.main_view_pager) }
 
-    override fun getContentId(): Int = R.layout.activity_main
+    override fun getContentId(): Int = R.layout.activity_main_viewpager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
