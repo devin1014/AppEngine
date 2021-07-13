@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
-import com.alibaba.android.arouter.app.core.getAppService
+import com.android.appengine.router.getAppService
 import com.alibaba.android.arouter.app.service.AuthService
 import com.alibaba.android.arouter.facade.annotation.Route
 

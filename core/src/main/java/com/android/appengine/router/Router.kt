@@ -1,11 +1,11 @@
-package com.alibaba.android.arouter.app.core
+package com.android.appengine.router
 
 import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.annotation.CallSuper
-import com.alibaba.android.arouter.app.BuildConfig
+import com.alibaba.android.arouter.BuildConfig
 import com.alibaba.android.arouter.facade.template.IProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import java.io.Serializable
@@ -64,7 +64,7 @@ interface RouterParseService : IProvider {
     }
 }
 
-class RouterInfo internal constructor() : Serializable {
+class RouterInfo : Serializable {
     var activity: String = ""
     var fragment: String = ""
 

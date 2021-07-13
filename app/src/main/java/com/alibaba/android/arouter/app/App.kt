@@ -4,7 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.util.Log
-import com.alibaba.android.arouter.app.core.Router
+import androidx.fragment.app.FragmentActivity
+import com.android.appengine.router.Router
 
 @Suppress("unused")
 class App : Application() {
@@ -17,6 +18,8 @@ class App : Application() {
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 Log.d(Constants.TAG_LOG, "onActivityCreated: ${activity.javaClass.simpleName}")
+                if (activity is FragmentActivity) {
+                }
             }
 
             override fun onActivityStarted(activity: Activity) {

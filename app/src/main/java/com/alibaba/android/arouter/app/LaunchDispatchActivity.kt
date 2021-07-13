@@ -3,10 +3,10 @@ package com.alibaba.android.arouter.app
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import com.alibaba.android.arouter.app.core.RouterInfo
-import com.alibaba.android.arouter.app.core.RouterParseService
-import com.alibaba.android.arouter.app.core.buildActivity
-import com.alibaba.android.arouter.app.core.getAppService
+import com.android.appengine.router.RouterInfo
+import com.android.appengine.router.RouterParseService
+import com.android.appengine.router.buildActivity
+import com.android.appengine.router.getAppService
 import com.alibaba.android.arouter.app.service.AuthService
 import com.alibaba.android.arouter.app.util.Utils
 

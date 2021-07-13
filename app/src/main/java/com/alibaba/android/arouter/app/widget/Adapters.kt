@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
 import com.alibaba.android.arouter.app.bean.Game
-import com.alibaba.android.arouter.app.core.buildActivity
+import com.android.appengine.router.buildActivity
 import java.text.SimpleDateFormat
 import java.util.*
 

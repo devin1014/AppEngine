@@ -6,7 +6,7 @@ import android.view.View.OnClickListener
 import android.widget.Button
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
-import com.alibaba.android.arouter.app.core.buildActivity
+import com.android.appengine.router.buildActivity
 import com.alibaba.android.arouter.facade.annotation.Route
 
 @Route(path = Constants.ROUTER_FRAGMENT_SETTINGS)

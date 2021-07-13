@@ -1,11 +1,11 @@
-package com.alibaba.android.arouter.app.core
+package com.android.appengine.router
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.app.BaseActivity
+import androidx.fragment.app.FragmentActivity
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.launcher.ARouter
 import java.io.Serializable
@@ -101,7 +101,7 @@ fun Activity.buildActivity(info: RouterInfo) {
         .navigation()
 }
 
-fun <T : Fragment> BaseActivity.buildFragment(path: String): T? {
+fun <T : Fragment> FragmentActivity.buildFragment(path: String): T? {
     return ARouter.getInstance()
         .build(path)
         .transferExtraParams(intent.extras)

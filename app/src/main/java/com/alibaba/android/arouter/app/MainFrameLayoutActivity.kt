@@ -1,8 +1,8 @@
 package com.alibaba.android.arouter.app
 
 import android.os.Bundle
-import com.alibaba.android.arouter.app.core.RouterInfo
-import com.alibaba.android.arouter.app.core.buildFragment
+import com.android.appengine.router.RouterInfo
+import com.android.appengine.router.buildFragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener

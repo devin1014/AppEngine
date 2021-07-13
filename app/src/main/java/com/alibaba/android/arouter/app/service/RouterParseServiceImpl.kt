@@ -2,8 +2,8 @@ package com.alibaba.android.arouter.app.service
 
 import android.net.Uri
 import com.alibaba.android.arouter.app.Constants
-import com.alibaba.android.arouter.app.core.RouterInfo
-import com.alibaba.android.arouter.app.core.RouterParseService
+import com.android.appengine.router.RouterInfo
+import com.android.appengine.router.RouterParseService
 import com.alibaba.android.arouter.facade.annotation.Route
 
 @Route(path = "/app/service/router_parse")

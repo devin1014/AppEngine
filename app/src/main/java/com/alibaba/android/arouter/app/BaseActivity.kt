@@ -10,11 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.alibaba.android.arouter.app.core.Router
-import com.alibaba.android.arouter.app.core.Router.OnRouter
-import com.alibaba.android.arouter.app.core.RouterInfo
-import com.alibaba.android.arouter.app.core.RouterParseService
-import com.alibaba.android.arouter.app.core.getAppService
+import com.android.appengine.router.Router
+import com.android.appengine.router.Router.OnRouter
+import com.android.appengine.router.RouterInfo
+import com.android.appengine.router.RouterParseService
+import com.android.appengine.router.getAppService
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
