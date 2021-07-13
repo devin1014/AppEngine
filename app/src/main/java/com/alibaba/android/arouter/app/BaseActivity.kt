@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.alibaba.android.arouter.app.core.NLRouter
-import com.alibaba.android.arouter.app.core.NLRouter.OnRouter
-import com.alibaba.android.arouter.app.core.NLRouterInfo
-import com.alibaba.android.arouter.app.core.NLRouterParseService
+import com.alibaba.android.arouter.app.core.Router
+import com.alibaba.android.arouter.app.core.Router.OnRouter
+import com.alibaba.android.arouter.app.core.RouterInfo
+import com.alibaba.android.arouter.app.core.RouterParseService
 import com.alibaba.android.arouter.app.core.getAppService
 import com.alibaba.android.arouter.app.service.AuthService
 import com.alibaba.android.arouter.app.util.Utils
@@ -29,7 +29,7 @@ abstract class BaseActivity : AppCompatActivity(), OnRouter {
 
     @JvmField
     @Autowired
-    var _routerInfo: NLRouterInfo? = null
+    var _routerInfo: RouterInfo? = null
 
     private val authChangedReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -56,11 +56,11 @@ abstract class BaseActivity : AppCompatActivity(), OnRouter {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        val pendingData: Uri? = intent.getParcelableExtra(NLRouter.EXTRA_KEY_PENDING_DATA)
-        val routerInfo: NLRouterInfo? = if (pendingData != null) {
-            getAppService(NLRouterParseService::class).parse(pendingData)
+        val pendingData: Uri? = intent.getParcelableExtra(Router.EXTRA_KEY_PENDING_DATA)
+        val routerInfo: RouterInfo? = if (pendingData != null) {
+            getAppService(RouterParseService::class).parse(pendingData)
         } else {
-            intent.getSerializableExtra(NLRouter.EXTRA_KEY_ROUTER_INFO) as? NLRouterInfo
+            intent.getSerializableExtra(Router.EXTRA_KEY_ROUTER_INFO) as? RouterInfo
         }
         if (routerInfo != null) {
             handleRouter(routerInfo)
@@ -72,12 +72,12 @@ abstract class BaseActivity : AppCompatActivity(), OnRouter {
         setIntent(intent)
         Utils.printIntentInfo(this, "onNewIntent")
         ARouter.getInstance().inject(this)
-        (intent.getSerializableExtra(NLRouter.EXTRA_KEY_ROUTER_INFO) as? NLRouterInfo)?.run {
+        (intent.getSerializableExtra(Router.EXTRA_KEY_ROUTER_INFO) as? RouterInfo)?.run {
             handleRouter(this)
         }
     }
 
-    private fun handleRouter(routerInfo: NLRouterInfo) {
+    private fun handleRouter(routerInfo: RouterInfo) {
         if (!onRouter(routerInfo)) {
             supportFragmentManager.fragments.forEach {
                 if (it is OnRouter && it.onRouter(routerInfo)) return@forEach
@@ -85,7 +85,7 @@ abstract class BaseActivity : AppCompatActivity(), OnRouter {
         }
     }
 
-    override fun onRouter(routerUri: NLRouterInfo): Boolean = false
+    override fun onRouter(routerUri: RouterInfo): Boolean = false
 
     override fun onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(authChangedReceiver)

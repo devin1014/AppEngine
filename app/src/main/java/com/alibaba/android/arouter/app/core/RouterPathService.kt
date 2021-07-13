@@ -8,7 +8,7 @@
 //import com.alibaba.android.arouter.facade.service.PathReplaceService
 //
 //@Route(path = "/app/service/nlrouter_path")
-//class NLRouterPathService : PathReplaceService {
+//class RouterPathService : PathReplaceService {
 //
 ////    private companion object {
 ////        const val SCHEME_HTTP = "http"

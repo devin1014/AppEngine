@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.app.R
-import com.alibaba.android.arouter.app.core.NLRouter.OnRouter
-import com.alibaba.android.arouter.app.core.NLRouterInfo
+import com.alibaba.android.arouter.app.core.Router.OnRouter
+import com.alibaba.android.arouter.app.core.RouterInfo
 import com.alibaba.android.arouter.app.util.Utils
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
@@ -38,7 +38,7 @@ abstract class BaseFragment : Fragment(), OnRouter {
     }
 
     @CallSuper
-    override fun onRouter(routerUri: NLRouterInfo): Boolean {
+    override fun onRouter(routerUri: RouterInfo): Boolean {
         if (routerUri.fragment == _path) {
             ARouter.getInstance().inject(this)
             return true

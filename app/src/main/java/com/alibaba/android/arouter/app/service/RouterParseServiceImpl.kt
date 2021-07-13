@@ -2,31 +2,31 @@ package com.alibaba.android.arouter.app.service
 
 import android.net.Uri
 import com.alibaba.android.arouter.app.Constants
-import com.alibaba.android.arouter.app.core.NLRouterInfo
-import com.alibaba.android.arouter.app.core.NLRouterParseService
+import com.alibaba.android.arouter.app.core.RouterInfo
+import com.alibaba.android.arouter.app.core.RouterParseService
 import com.alibaba.android.arouter.facade.annotation.Route
 
 @Route(path = "/app/service/router_parse")
-class RouterParseServiceImpl : NLRouterParseService {
+class RouterParseServiceImpl : RouterParseService {
 
     override var scheme: String = "scheme"
 
-    override fun parseRouterUri(uri: Uri): NLRouterInfo? {
-        val routerInfo: NLRouterInfo? = when (uri.host) {
-            "main_home" -> NLRouterInfo().apply {
+    override fun parseRouterUri(uri: Uri): RouterInfo? {
+        val routerInfo: RouterInfo? = when (uri.host) {
+            "main_home" -> RouterInfo().apply {
                 activity = Constants.ROUTER_ACTIVITY_MAIN
                 fragment = Constants.ROUTER_FRAGMENT_HOME
             }
-            "main_schedule" -> NLRouterInfo().apply {
+            "main_schedule" -> RouterInfo().apply {
                 activity = Constants.ROUTER_ACTIVITY_MAIN
                 fragment = Constants.ROUTER_FRAGMENT_SCHEDULE
             }
-            "main_settings" -> NLRouterInfo().apply {
+            "main_settings" -> RouterInfo().apply {
                 activity = Constants.ROUTER_ACTIVITY_MAIN
                 fragment = Constants.ROUTER_FRAGMENT_SETTINGS
             }
             "account" -> {
-                NLRouterInfo().apply {
+                RouterInfo().apply {
                     activity = Constants.ROUTER_ACTIVITY_ACCOUNT
                     fragment = if (uri.path?.contains("signIn") == true)
                         Constants.ROUTER_FRAGMENT_AUTH_SIGNIN

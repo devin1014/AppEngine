@@ -23,7 +23,7 @@ fun <T> getAppService(service: Class<out T>): T = ARouter.getInstance().navigati
 // ---------------------------------------------------------------------
 fun Postcard.transferPendingData(intent: Intent): Postcard {
     if (intent.data != null) {
-        withParcelable(NLRouter.EXTRA_KEY_PENDING_DATA, intent.data)
+        withParcelable(Router.EXTRA_KEY_PENDING_DATA, intent.data)
     }
     return this
 }
@@ -43,9 +43,9 @@ fun Postcard.transferExtraParams(bundle: Bundle?): Postcard {
     return this
 }
 
-fun Postcard.transferExtraParams(routerInfo: NLRouterInfo?): Postcard {
+fun Postcard.transferExtraParams(routerInfo: RouterInfo?): Postcard {
     if (routerInfo != null) {
-        setPostcardData(this@transferExtraParams, NLRouter.EXTRA_KEY_ROUTER_INFO, routerInfo)
+        setPostcardData(this@transferExtraParams, Router.EXTRA_KEY_ROUTER_INFO, routerInfo)
         if (routerInfo.params.isNotEmpty()) {
             for ((key, value) in routerInfo.params) {
                 // ignore chrome browser data.
@@ -84,20 +84,20 @@ fun Activity.buildActivity(path: String, pendingData: Boolean = false) {
     if (pendingData) postcard.transferPendingData(intent)
     postcard
         .transferExtraParams(intent.extras)
-        .withString(NLRouter.EXTRA_KEY_PATH, path)
+        .withString(Router.EXTRA_KEY_PATH, path)
         .navigation()
 }
 
-fun Activity.buildActivity(lambda: NLRouterInfo.() -> Unit) {
-    buildActivity(NLRouterInfo().apply(lambda))
+fun Activity.buildActivity(lambda: RouterInfo.() -> Unit) {
+    buildActivity(RouterInfo().apply(lambda))
 }
 
-fun Activity.buildActivity(info: NLRouterInfo) {
+fun Activity.buildActivity(info: RouterInfo) {
     ARouter.getInstance()
         .build(info.activity)
         .transferExtraParams(intent.extras)
         .transferExtraParams(info)
-        .withString(NLRouter.EXTRA_KEY_PATH, info.activity)
+        .withString(Router.EXTRA_KEY_PATH, info.activity)
         .navigation()
 }
 
@@ -105,6 +105,6 @@ fun <T : Fragment> BaseActivity.buildFragment(path: String): T? {
     return ARouter.getInstance()
         .build(path)
         .transferExtraParams(intent.extras)
-        .withString(NLRouter.EXTRA_KEY_PATH, path)
+        .withString(Router.EXTRA_KEY_PATH, path)
         .navigation() as? T
 }

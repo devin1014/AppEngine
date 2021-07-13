@@ -1,7 +1,7 @@
 package com.alibaba.android.arouter.app
 
 import android.os.Bundle
-import com.alibaba.android.arouter.app.core.NLRouterInfo
+import com.alibaba.android.arouter.app.core.RouterInfo
 import com.alibaba.android.arouter.app.core.buildFragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
@@ -34,7 +34,7 @@ class MainActivity2 : BaseActivity(), OnTabSelectedListener {
         }
     }
 
-    override fun onRouter(routerUri: NLRouterInfo): Boolean {
+    override fun onRouter(routerUri: RouterInfo): Boolean {
         tabMap[routerUri.fragment]?.run {
             if (tabLayout.selectedTabPosition != this.position) {
                 tabLayout.selectTab(this)

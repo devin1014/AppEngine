@@ -10,14 +10,14 @@ import com.alibaba.android.arouter.facade.template.IProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import java.io.Serializable
 
-object NLRouter {
+object Router {
 
     const val EXTRA_KEY_PATH = "_path"
     const val EXTRA_KEY_PENDING_DATA = "_pendingData"
     const val EXTRA_KEY_ROUTER_INFO = "_routerInfo"
 
     interface OnRouter {
-        fun onRouter(routerUri: NLRouterInfo): Boolean
+        fun onRouter(routerUri: RouterInfo): Boolean
     }
 
     fun init(context: Application) {
@@ -29,7 +29,7 @@ object NLRouter {
     }
 }
 
-interface NLRouterParseService : IProvider {
+interface RouterParseService : IProvider {
     var scheme: String
 
     @CallSuper
@@ -42,9 +42,9 @@ interface NLRouterParseService : IProvider {
         }
     }
 
-    fun parse(uri: Uri): NLRouterInfo? = parseRouterUri(convertUri(uri))
+    fun parse(uri: Uri): RouterInfo? = parseRouterUri(convertUri(uri))
 
-    fun parseRouterUri(uri: Uri): NLRouterInfo?
+    fun parseRouterUri(uri: Uri): RouterInfo?
 
     private fun convertUri(httpUri: Uri): Uri {
         if (!httpUri.scheme.isNullOrEmpty() && !httpUri.host.isNullOrEmpty()) {
@@ -64,7 +64,7 @@ interface NLRouterParseService : IProvider {
     }
 }
 
-class NLRouterInfo internal constructor() : Serializable {
+class RouterInfo internal constructor() : Serializable {
     var activity: String = ""
     var fragment: String = ""
 

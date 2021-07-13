@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
-import com.alibaba.android.arouter.app.core.NLRouterInfo
+import com.alibaba.android.arouter.app.core.RouterInfo
 import com.alibaba.android.arouter.app.widget.ListAdapter
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -31,7 +31,7 @@ class ScheduleFragment : BaseFragment() {
         }
     }
 
-    override fun onRouter(routerUri: NLRouterInfo): Boolean {
+    override fun onRouter(routerUri: RouterInfo): Boolean {
         val handled = super.onRouter(routerUri)
         if (handled) recyclerView.scrollToPosition(position)
         return handled

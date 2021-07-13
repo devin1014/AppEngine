@@ -1,4 +1,3 @@
-//include ':demo'
 include ':app'
 include ':module-java'
 include ':module-kotlin'

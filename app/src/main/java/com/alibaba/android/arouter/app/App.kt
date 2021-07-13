@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import android.util.Log
-import com.alibaba.android.arouter.app.core.NLRouter
+import com.alibaba.android.arouter.app.core.Router
 
 @Suppress("unused")
 class App : Application() {
@@ -43,6 +43,6 @@ class App : Application() {
             }
         })
 
-        NLRouter.init(this)
+        Router.init(this)
     }
 }

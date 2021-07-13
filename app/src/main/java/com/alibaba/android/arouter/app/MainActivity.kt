@@ -3,7 +3,7 @@ package com.alibaba.android.arouter.app
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.app.core.NLRouterInfo
+import com.alibaba.android.arouter.app.core.RouterInfo
 import com.alibaba.android.arouter.app.core.buildFragment
 import com.alibaba.android.arouter.app.widget.FragmentPagerAdapter2
 import com.alibaba.android.arouter.app.widget.TabLayoutCompat
@@ -45,7 +45,7 @@ class MainActivity : BaseActivity() {
         })
     }
 
-    override fun onRouter(routerUri: NLRouterInfo): Boolean {
+    override fun onRouter(routerUri: RouterInfo): Boolean {
         viewPager.currentItem = max(pagePaths.indexOf(routerUri.fragment), 0)
         return true
     }
