@@ -1,11 +1,9 @@
 package com.android.appengine.router
 
-import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.annotation.CallSuper
-import com.alibaba.android.arouter.BuildConfig
 import com.alibaba.android.arouter.facade.template.IProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import java.io.Serializable
@@ -18,14 +16,6 @@ object Router {
 
     interface OnRouter {
         fun onRouter(routerUri: RouterInfo): Boolean
-    }
-
-    fun init(context: Application) {
-        if (BuildConfig.DEBUG) {
-            ARouter.openLog()
-            //ARouter.printStackTrace()
-        }
-        ARouter.init(context)
     }
 }
 
