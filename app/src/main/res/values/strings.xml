@@ -2,10 +2,4 @@
 
     <string name="app_name">AppEngine</string>
 
-    <string-array name="MAIN_TABS">
-        <item>Home</item>
-        <item>Schedule</item>
-        <item>Settings</item>
-    </string-array>
-
 </resources>

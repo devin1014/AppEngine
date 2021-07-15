@@ -19,6 +19,7 @@ object Constants {
     const val ROUTER_FRAGMENT_HOME = "/main/home"
     const val ROUTER_FRAGMENT_SCHEDULE = "/main/schedule"
     const val ROUTER_FRAGMENT_SETTINGS = "/main/settings"
+    const val ROUTER_FRAGMENT_TAB = "/main/tab"
 
     const val ROUTER_FRAGMENT_AUTH_SIGNIN = "/account/signin"
     const val ROUTER_FRAGMENT_AUTH_REGISTER = "/account/register"
