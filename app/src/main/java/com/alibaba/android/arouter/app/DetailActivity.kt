@@ -2,7 +2,7 @@ package com.alibaba.android.arouter.app
 
 import android.os.Bundle
 import android.widget.TextView
-import com.alibaba.android.arouter.app.bean.Game
+import com.alibaba.android.arouter.app.bean.TestGame
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 
@@ -11,7 +11,7 @@ class DetailActivity : BaseActivity() {
 
     @JvmField
     @Autowired
-    var game: Game? = null
+    var game: TestGame? = null
 
     override fun getContentId(): Int = R.layout.activity_detail
 

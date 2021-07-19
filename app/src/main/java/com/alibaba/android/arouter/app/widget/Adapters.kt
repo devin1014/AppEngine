@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
-import com.alibaba.android.arouter.app.bean.Game
+import com.alibaba.android.arouter.app.bean.TestGame
 import com.alibaba.android.arouter.app.util.AppLog
 import com.alibaba.android.arouter.app.util.getEntryName
 import com.alibaba.android.arouter.app.util.getRadix16Code
@@ -71,7 +71,7 @@ class ListAdapter(private val activity: Activity) : Adapter<ListHolder>(), OnCli
     override fun getItemViewType(position: Int): Int = position / 10
 
     override fun onClick(v: View) {
-        val game = Game().apply {
+        val game = TestGame().apply {
             id = "ext_${v.tag as String}"
             name = "this is test game"
             date = dateFormat.format(Date())
