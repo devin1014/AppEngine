@@ -1,7 +1,7 @@
 package com.alibaba.android.arouter.app
 
 object Constants {
-    const val TAG_LOG = "Router"
+    const val TAG_LOG = "AppDemo"
 
     const val GROUP_VIEWPAGER2 = "viewpager2"
     const val GROUP_FRAME_LAYOUT = "frame_layout"

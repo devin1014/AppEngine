@@ -4,35 +4,30 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import kotlin.reflect.KClass
 
-class RetrofitService private constructor() {
+@Suppress("ObjectPropertyName")
+object RetrofitService {
 
-    @Suppress("ObjectPropertyName")
-    companion object {
+    const val KEY_BASE_URL="baseUrl"
 
-        private val defaultHttpClient: OkHttpClient
-            get() = OkHttpClient.Builder().build()
+    private val defaultHttpClient: OkHttpClient by lazy { OkHttpClient.Builder().build() }
 
-        var httpClient: OkHttpClient? = null
+    var httpClient: OkHttpClient? = null
+    var baseUrl: String = ""
 
-        private var _retrofit: Retrofit? = null
-        private val retrofit: Retrofit
-            get() {
-                if (_retrofit == null) {
-                    _retrofit = Retrofit.Builder()
-                        .baseUrl("https://wnba.neulion.com/")
-                        .client(httpClient ?: defaultHttpClient)
-                        .addConverterFactory(CustomGsonConvert())
-                        .build()
-                }
-                return _retrofit!!
+    private var _retrofit: Retrofit? = null
+    private val retrofit: Retrofit
+        get() {
+            if (_retrofit == null) {
+                _retrofit = Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .client(httpClient ?: defaultHttpClient)
+                    .addConverterFactory(CustomGsonConvert())
+                    .build()
             }
-
-        fun <T> get(t: Class<T>): T {
-            return retrofit.create(t)
+            return _retrofit!!
         }
 
-        fun <T : Any> get(t: KClass<T>): T {
-            return get(t.java)
-        }
-    }
+    fun <T> get(t: Class<T>): T = retrofit.create(t)
+
+    fun <T : Any> get(t: KClass<T>): T = get(t.java)
 }

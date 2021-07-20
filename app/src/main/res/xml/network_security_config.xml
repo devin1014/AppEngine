@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <debug-overrides>
+    <debug-overrides cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
             <certificates src="user" />
         </trust-anchors>
     </debug-overrides>
+    <!--note: http not work when base-config missing 'cleartextTrafficPermitted'-->
+    <!--note: http not work when base-config missing 'cleartextTrafficPermitted'-->
+    <!--note: http not work when base-config missing 'cleartextTrafficPermitted'-->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
 </network-security-config>

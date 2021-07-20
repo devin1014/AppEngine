@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Button
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.R
-import com.android.appengine.router.buildActivity
+import com.alibaba.android.arouter.app.util.AppLog
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.android.appengine.room.RoomDatabase
+import com.android.appengine.router.buildActivity
 
 @Route(path = Constants.ROUTER_FRAGMENT_SETTINGS)
 class SettingsFragment : BaseFragment() {
@@ -29,5 +32,12 @@ class SettingsFragment : BaseFragment() {
         view.findViewById<Button>(R.id.settings_btn_signin).setOnClickListener(onClickListener)
         view.findViewById<Button>(R.id.settings_btn_register).setOnClickListener(onClickListener)
         view.findViewById<Button>(R.id.settings_btn_purchase).setOnClickListener(onClickListener)
+
+        lifecycleScope.launchWhenResumed {
+            val result = RoomDatabase.database.urlParamDao().getUrlParams()
+            if(result.isNotEmpty()){
+                AppLog.info("result: ${result.size}")
+            }
+        }
     }
 }
