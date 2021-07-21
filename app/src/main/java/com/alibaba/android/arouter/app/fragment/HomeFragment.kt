@@ -3,9 +3,12 @@ package com.alibaba.android.arouter.app.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
 import com.alibaba.android.arouter.app.Constants
 import com.alibaba.android.arouter.app.bean.AppConfig
 import com.alibaba.android.arouter.app.service.AppConfigService
+import com.alibaba.android.arouter.app.service.background.onceScoreboardRequest
 import com.alibaba.android.arouter.app.util.AppLog
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.android.app.http.ResponseResult
@@ -37,6 +40,8 @@ class HomeFragment : BaseFragment() {
                 AppLog.warning("failed: ${config.getException()}")
             }
         }
+
+        WorkManager.getInstance(requireContext()).enqueueUniqueWork("score", ExistingWorkPolicy.KEEP, onceScoreboardRequest)
     }
 
     override fun onRouter(routerUri: RouterInfo): Boolean {
